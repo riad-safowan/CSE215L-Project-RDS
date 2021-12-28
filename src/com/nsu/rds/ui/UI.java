@@ -5,8 +5,5 @@ public class UI {
         System.out.println("Welcome to North South University\n\n");
     }
 
-    public static void showLoginScreen(){
-        showWelcome();
-        System.out.println("Login");
-    }
+
 }

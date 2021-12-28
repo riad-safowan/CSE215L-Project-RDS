@@ -1,4 +1,4 @@
-package src.com.nsu.rds.data;
+package src.com.nsu.rds.data.repositories;
 
 import src.com.nsu.rds.models.Courses;
 import src.com.nsu.rds.utils.Const;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class Repository {
+public class CourseRepository {
     private ArrayList<Courses> courses = new ArrayList<>();
 
     void init() {
