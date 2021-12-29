@@ -1,5 +1,6 @@
 package src.com.nsu.rds.data.repositories;
 
+import src.com.nsu.rds.models.Student;
 import src.com.nsu.rds.models.User;
 import src.com.nsu.rds.utils.Const;
 
@@ -43,11 +44,17 @@ public class UserRepository {
         try {
             FileWriter myWriter = new FileWriter(Const.ALL_USER_LIST);
             for (User u : users) {
-                myWriter.write(u.getName() + " " + u.getPassword() + " "+u.isAdmin()+"\n");
+                myWriter.write(u.getUsername() + " " + u.getPassword() + " " + u.isAdmin() + "\n");
             }
             myWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void addUser(User u) {
+        ArrayList<User> users = getUsers();
+        users.add(u);
+        setUsers(users);
     }
 }

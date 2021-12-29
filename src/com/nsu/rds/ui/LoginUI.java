@@ -1,6 +1,6 @@
 package src.com.nsu.rds.ui;
 
-import src.com.nsu.rds.data.Data;
+import src.com.nsu.rds.data.repositories.UserRepository;
 import src.com.nsu.rds.models.User;
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class LoginUI {
     static Scanner scanner = new Scanner(System.in);
-    static Data data = new Data();
+    static UserRepository userRepository = new UserRepository();
 
     public static void showLoginScreen() {
         UI.showWelcome();
@@ -19,27 +19,23 @@ public class LoginUI {
         System.out.print("Enter Password: ");
         String password = scanner.next();
 
-        switch (loginSuccess(username, password)) {
-            case "ADMIN" -> {
-                System.out.println("logged in as admin");
-            }
-            case "USER" -> {
-                System.out.println("logged in as student");
-            }
-            default -> {
-                System.out.println("Incorrect username or password");
+        User user = loginSuccess(username, password);
+        if (!user.getUsername().isEmpty()) {
+            if (user.isAdmin()) {
+                AdminUI.homeScreen(user);
+            } else {
+                StudentUI.homeScreen(user);
             }
         }
-
     }
 
-    private static String loginSuccess(String username, String password) {
-        ArrayList<User> users = data.getUsers();
+    private static User loginSuccess(String username, String password) {
+        ArrayList<User> users = userRepository.getUsers();
         for (User user : users) {
-            if (Objects.equals(user.getName(), username)) {
-                if (Objects.equals(user.getPassword(), password)) return (user.isAdmin()) ? "ADMIN" : "USER";
+            if (Objects.equals(user.getUsername(), username)) {
+                if (Objects.equals(user.getPassword(), password)) return user;
             }
         }
-        return "";
+        return new User();
     }
 }

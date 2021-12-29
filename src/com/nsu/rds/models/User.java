@@ -1,22 +1,25 @@
 package src.com.nsu.rds.models;
 
 public class User {
-    private String name;
+    private String username;
     private String password;
     public boolean isAdmin;
 
-    public User(String name, String password, boolean isAdmin) {
-        this.name = name;
+    public User() {
+    }
+
+    public User(String username, String password, boolean isAdmin) {
+        this.username = username;
         this.password = password;
         this.isAdmin = isAdmin;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

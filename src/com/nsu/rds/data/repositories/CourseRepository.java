@@ -26,7 +26,7 @@ public class CourseRepository {
                 new Courses("MAT130", 3)));
     }
 
-    public ArrayList<Courses> getCourses() {
+    public  ArrayList<Courses> getCourses() {
         ArrayList<Courses> newList = new ArrayList<>();
         try {
             File myObj = new File(Const.ALL_COURSE_LIST);
@@ -41,7 +41,7 @@ public class CourseRepository {
         return newList;
     }
 
-    public void setCourses(ArrayList<Courses> courses) {
+    public  void setCourses(ArrayList<Courses> courses) {
 //        init();
         try {
             FileWriter myWriter = new FileWriter(Const.ALL_COURSE_LIST);
@@ -76,3 +76,4 @@ public class CourseRepository {
         setCourses(list);
     }
 }
+
