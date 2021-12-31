@@ -1,6 +1,6 @@
 package src.com.nsu.rds.data.repositories;
 
-import src.com.nsu.rds.models.User;
+import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.utils.Const;
 
 import java.io.File;

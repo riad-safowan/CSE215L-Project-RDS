@@ -1,7 +1,7 @@
 package src.com.nsu.rds.ui;
 
 import src.com.nsu.rds.data.repositories.UserRepository;
-import src.com.nsu.rds.models.User;
+import src.com.nsu.rds.data.models.User;
 
 import java.util.ArrayList;
 import java.util.Objects;

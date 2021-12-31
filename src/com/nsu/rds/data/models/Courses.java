@@ -1,4 +1,4 @@
-package src.com.nsu.rds.models;
+package src.com.nsu.rds.data.models;
 
 public class Courses {
     private String name;

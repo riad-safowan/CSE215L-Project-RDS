@@ -1,4 +1,4 @@
-package src.com.nsu.rds.models;
+package src.com.nsu.rds.data.models;
 
 import java.util.List;
 
