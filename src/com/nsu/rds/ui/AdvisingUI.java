@@ -29,7 +29,6 @@ public class AdvisingUI {
                 default -> System.out.println("Wrong Input! Select Again: ");
             }
         } while (!isDone);
-        System.out.println("You are logged out\n\n\n\n\n");
         LoginUI.showLoginScreen();
     }
 
