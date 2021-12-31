@@ -13,9 +13,9 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class CourseRepository {
-    private ArrayList<Courses> courses = new ArrayList<>();
+    private static ArrayList<Courses> courses = new ArrayList<>();
 
-    void init() {
+    static void init() {
         courses.addAll(List.of(
                 new Courses("CSE115", 3),
                 new Courses("CSE115L", 1),
@@ -26,7 +26,7 @@ public class CourseRepository {
                 new Courses("MAT130", 3)));
     }
 
-    public  ArrayList<Courses> getCourses() {
+    public static ArrayList<Courses> getCourses() {
         ArrayList<Courses> newList = new ArrayList<>();
         try {
             File myObj = new File(Const.ALL_COURSE_LIST);
@@ -41,7 +41,7 @@ public class CourseRepository {
         return newList;
     }
 
-    public  void setCourses(ArrayList<Courses> courses) {
+    public static void setCourses(ArrayList<Courses> courses) {
 //        init();
         try {
             FileWriter myWriter = new FileWriter(Const.ALL_COURSE_LIST);
@@ -54,13 +54,13 @@ public class CourseRepository {
         }
     }
 
-    public void addCourse(Courses c) {
+    public static void addCourse(Courses c) {
         ArrayList<Courses> list = getCourses();
         list.add(c);
         setCourses(list);
     }
 
-    public void removeCourse(String c) {
+    public static void removeCourse(String c) {
         ArrayList<Courses> list = getCourses();
         int index = 0;
         boolean found = false;

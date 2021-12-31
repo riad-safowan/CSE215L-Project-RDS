@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class StudentRepository extends UserRepository {
-    private ArrayList<Student> students = new ArrayList<>();
+public class StudentRepository {
+    private static ArrayList<Student> students = new ArrayList<>();
 
-    void init() {
+    static void init() {
         students.addAll(
                 List.of(
                         new Student("student1", "12345", false, "FirstName", "LastName", List.of(), 0),
@@ -27,7 +27,7 @@ public class StudentRepository extends UserRepository {
         );
     }
 
-    public void setStudents(ArrayList<Student> students) {
+    public static void setStudents(ArrayList<Student> students) {
         init();
         try {
             FileWriter myWriter = new FileWriter(Const.ALL_STUDENT_LIST);
@@ -40,14 +40,14 @@ public class StudentRepository extends UserRepository {
         }
     }
 
-    public void addStudent(Student s) {
+    public static void addStudent(Student s) {
         ArrayList<Student> students = getStudents();
         students.add(s);
-        addUser(s);
+        UserRepository.addUser(s);
         setStudents(students);
     }
 
-    private ArrayList<Student> getStudents() {
+    private static ArrayList<Student> getStudents() {
         ArrayList<Student> newList = new ArrayList<>();
         try {
             File myObj = new File(Const.ALL_STUDENT_LIST);

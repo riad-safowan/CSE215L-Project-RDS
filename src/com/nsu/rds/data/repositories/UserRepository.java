@@ -1,6 +1,5 @@
 package src.com.nsu.rds.data.repositories;
 
-import src.com.nsu.rds.models.Student;
 import src.com.nsu.rds.models.User;
 import src.com.nsu.rds.utils.Const;
 
@@ -14,9 +13,9 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class UserRepository {
-    private ArrayList<User> users = new ArrayList<>();
+    private static ArrayList<User> users = new ArrayList<>();
 
-    void init() {
+    static void init() {
         users.addAll(List.of(
                 new User("riad", "12345", true),
                 new User("abir", "12345", true),
@@ -24,7 +23,7 @@ public class UserRepository {
         ));
     }
 
-    public ArrayList<User> getUsers() {
+    public static ArrayList<User> getUsers() {
         ArrayList<User> newList = new ArrayList<>();
         try {
             File myObj = new File(Const.ALL_USER_LIST);
@@ -39,7 +38,7 @@ public class UserRepository {
         return newList;
     }
 
-    public void setUsers(ArrayList<User> users) {
+    public static void setUsers(ArrayList<User> users) {
 //                init();
         try {
             FileWriter myWriter = new FileWriter(Const.ALL_USER_LIST);
@@ -52,7 +51,7 @@ public class UserRepository {
         }
     }
 
-    public void addUser(User u) {
+    public static void addUser(User u) {
         ArrayList<User> users = getUsers();
         users.add(u);
         setUsers(users);
