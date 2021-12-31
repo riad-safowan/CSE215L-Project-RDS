@@ -4,7 +4,7 @@ import src.com.nsu.rds.data.models.User;
 
 import java.util.Scanner;
 
-public class StudentUI {
+public class AdvisingUI {
     static Scanner scanner = new Scanner(System.in);
     static User currentUser;
 
@@ -16,14 +16,15 @@ public class StudentUI {
 
         System.out.print("Select an option: ");
         do {
-            System.out.println("1. See your information");
-            System.out.println("2. Advising window");
-
-            System.out.println("0. Logout");
+            System.out.println("1. See offered course list");
+            System.out.println("2. Add a new course");
+            System.out.println("3. Remove a course");
+            System.out.println("0. Back");
 
             switch (scanner.nextInt()) {
-                case 1 -> studentInfo();
-                case 2 -> advisingWindow();
+                case 1 -> offerdCourseList();
+                case 2 -> addCourse();
+                case 3 -> removeCourse();
                 case 0 -> isDone = true;
                 default -> System.out.println("Wrong Input! Select Again: ");
             }
@@ -32,9 +33,12 @@ public class StudentUI {
         LoginUI.showLoginScreen();
     }
 
-    private static void advisingWindow() {
+    private static void removeCourse() {
     }
 
-    private static void studentInfo() {
+    private static void addCourse() {
+    }
+
+    private static void offerdCourseList() {
     }
 }
