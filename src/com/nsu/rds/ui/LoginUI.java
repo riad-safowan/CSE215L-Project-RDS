@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class LoginUI {
     static Scanner scanner = new Scanner(System.in);
-    static UserRepository userRepository = new UserRepository();
 
     public static void showLoginScreen() {
         UI.showWelcome();
@@ -30,7 +29,7 @@ public class LoginUI {
     }
 
     private static User loginSuccess(String username, String password) {
-        ArrayList<User> users = userRepository.getUsers();
+        ArrayList<User> users = UserRepository.getUsers();
         for (User user : users) {
             if (Objects.equals(user.getUsername(), username)) {
                 if (Objects.equals(user.getPassword(), password)) return user;
