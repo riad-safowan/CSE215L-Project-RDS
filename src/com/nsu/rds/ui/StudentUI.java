@@ -14,13 +14,12 @@ public class StudentUI {
         System.out.println("Welcome " + user.getUsername());
         boolean isDone = false;
 
-        System.out.print("Select an option: ");
         do {
             System.out.println("1. See your information");
             System.out.println("2. Advising window");
-
             System.out.println("0. Logout");
 
+            System.out.print("Select an option: ");
             switch (scanner.nextInt()) {
                 case 1 -> studentInfo();
                 case 2 -> advisingWindow();
@@ -33,6 +32,7 @@ public class StudentUI {
     }
 
     private static void advisingWindow() {
+        AdvisingUI.homeScreen(currentUser);
     }
 
     private static void studentInfo() {

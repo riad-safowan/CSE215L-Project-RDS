@@ -14,13 +14,13 @@ public class AdvisingUI {
         System.out.println("Welcome " + user.getUsername());
         boolean isDone = false;
 
-        System.out.print("Select an option: ");
         do {
             System.out.println("1. See offered course list");
             System.out.println("2. Add a new course");
             System.out.println("3. Remove a course");
             System.out.println("0. Back");
 
+            System.out.print("Select an option: ");
             switch (scanner.nextInt()) {
                 case 1 -> offerdCourseList();
                 case 2 -> addCourse();

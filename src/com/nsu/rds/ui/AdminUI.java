@@ -13,7 +13,6 @@ public class AdminUI {
         System.out.println("Welcome " + user.getUsername());
         boolean isDone = false;
 
-        System.out.print("Select an option: ");
         do {
             System.out.println("1. See student list");
             System.out.println("2. Add a new student");
@@ -27,6 +26,7 @@ public class AdminUI {
             System.out.println("10. Remove a Course");
             System.out.println("0. Logout");
 
+            System.out.print("Select an option: ");
             switch (scanner.nextInt()) {
                 case 1 -> studentList();
                 case 2 -> addStudent();
