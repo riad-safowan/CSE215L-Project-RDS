@@ -8,8 +8,8 @@ public class Student extends User{
     private List<Courses> coursesList;
     private double unpaidAmount;
 
-    public Student(String username, String password, boolean isAdmin, String firstName, String lastName, List<Courses> coursesList, double unpaidAmount) {
-        super(username, password, isAdmin);
+    public Student(String username, String password, boolean isAdmin, String addedBy, String firstName, String lastName, List<Courses> coursesList, double unpaidAmount) {
+        super(username, password, isAdmin, addedBy);
         this.firstName = firstName;
         this.lastName = lastName;
         this.coursesList = coursesList;

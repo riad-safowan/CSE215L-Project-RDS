@@ -3,15 +3,17 @@ package src.com.nsu.rds.data.models;
 public class User {
     private String username;
     private String password;
-    public boolean isAdmin;
+    private boolean isAdmin;
+    private String addedBy;
 
     public User() {
     }
 
-    public User(String username, String password, boolean isAdmin) {
+    public User(String username, String password, boolean isAdmin, String addedBy) {
         this.username = username;
         this.password = password;
         this.isAdmin = isAdmin;
+        this.addedBy = addedBy;
     }
 
     public String getUsername() {
@@ -36,5 +38,13 @@ public class User {
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    public String getAddedBy() {
+        return addedBy;
+    }
+
+    public void setAddedBy(String addedBy) {
+        this.addedBy = addedBy;
     }
 }

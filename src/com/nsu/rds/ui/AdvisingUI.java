@@ -22,7 +22,7 @@ public class AdvisingUI {
 
             System.out.print("Select an option: ");
             switch (scanner.nextInt()) {
-                case 1 -> offerdCourseList();
+                case 1 -> offeredCourseList();
                 case 2 -> addCourse();
                 case 3 -> removeCourse();
                 case 0 -> isDone = true;
@@ -38,6 +38,6 @@ public class AdvisingUI {
     private static void addCourse() {
     }
 
-    private static void offerdCourseList() {
+    private static void offeredCourseList() {
     }
 }

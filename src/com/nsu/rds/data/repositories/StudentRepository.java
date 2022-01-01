@@ -18,9 +18,9 @@ public class StudentRepository {
     static void init() {
         students.addAll(
                 List.of(
-                        new Student("student1", "12345", false, "FirstName", "LastName", List.of(), 0),
-                        new Student("student2", "12345", false, "FirstName", "LastName", List.of(), 0),
-                        new Student("student3", "12345", false, "FirstName", "LastName", List.of(), 0)
+                        new Student("student1", "12345", false, "Developer", "FirstName", "LastName", List.of(), 0),
+                        new Student("student2", "12345", false, "Developer", "FirstName", "LastName", List.of(), 0),
+                        new Student("student3", "12345", false, "Developer", "FirstName", "LastName", List.of(), 0)
                 )
         );
     }
@@ -30,7 +30,7 @@ public class StudentRepository {
         try {
             FileWriter myWriter = new FileWriter(Const.ALL_STUDENT_LIST);
             for (Student s : students) {
-                myWriter.write(s.getUsername() + " " + s.getPassword() + " " + s.getFullName() + " " + s.getUnpaidAmount() + "\n");
+                myWriter.write(s.getUsername() + " " + s.getPassword() + " "+s.getAddedBy()+" " + s.getFullName() + " " + s.getUnpaidAmount() + "\n");
             }
             myWriter.close();
         } catch (IOException e) {
@@ -51,7 +51,7 @@ public class StudentRepository {
             File myObj = new File(Const.ALL_STUDENT_LIST);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNext()) {
-                newList.add(new Student(myReader.next(), myReader.next(), !Objects.equals(myReader.next(), "false"), myReader.next(), myReader.next(), List.of(), myReader.nextDouble()));
+                newList.add(new Student(myReader.next(), myReader.next(), !Objects.equals(myReader.next(), "false"),myReader.next(), myReader.next(), myReader.next(), List.of(), myReader.nextDouble()));
             }
             myReader.close();
         } catch (FileNotFoundException e) {

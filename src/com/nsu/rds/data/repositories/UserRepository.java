@@ -17,9 +17,9 @@ public class UserRepository {
 
     static void init() {
         users.addAll(List.of(
-                new User("riad", "12345", true),
-                new User("abir", "12345", true),
-                new User("rubayet", "12345", false)
+                new User("riad", "12345", true, "Developer"),
+                new User("abir", "12345", true, "Developer"),
+                new User("rubayet", "12345", false, "Developer")
         ));
     }
 
@@ -29,7 +29,7 @@ public class UserRepository {
             File myObj = new File(Const.ALL_USER_LIST);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNext()) {
-                newList.add(new User(myReader.next(), myReader.next(), !Objects.equals(myReader.next(), "false")));
+                newList.add(new User(myReader.next(), myReader.next(), !Objects.equals(myReader.next(), "false"), myReader.next()));
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -43,7 +43,7 @@ public class UserRepository {
         try {
             FileWriter myWriter = new FileWriter(Const.ALL_USER_LIST);
             for (User u : users) {
-                myWriter.write(u.getUsername() + " " + u.getPassword() + " " + u.isAdmin() + "\n");
+                myWriter.write(u.getUsername() + " " + u.getPassword() + " " + u.isAdmin() + " " + u.getAddedBy() + "\n");
             }
             myWriter.close();
         } catch (IOException e) {
