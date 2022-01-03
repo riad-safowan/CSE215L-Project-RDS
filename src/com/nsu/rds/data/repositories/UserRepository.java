@@ -17,8 +17,8 @@ public class UserRepository {
 
     public static void init() {
         users.addAll(List.of(
-                new User("a", "1", true, "Developer", "Test", "Admin"),
-                new User("u", "1", false, "Developer", "Test", "User")
+                new User("2112312", "1", true, "Developer", "Test", "Admin"),
+                new User("2112313", "1", false, "Developer", "Test", "User")
         ));
         setUsers(users);
     }
@@ -42,7 +42,7 @@ public class UserRepository {
         try {
             FileWriter myWriter = new FileWriter(Const.ALL_USER_LIST);
             for (User u : users) {
-                myWriter.write(u.getUsername() + " " + u.getPassword() + " " + u.isAdmin() + " " + u.getAddedBy() + " " + u.getFullName() + "\n");
+                myWriter.write(u.getUserId() + " " + u.getPassword() + " " + u.isAdmin() + " " + u.getAddedBy() + " " + u.getFullName() + "\n");
             }
             myWriter.close();
         } catch (IOException e) {
@@ -50,8 +50,12 @@ public class UserRepository {
         }
     }
 
-    public static void addUser(User u) {
+    public static void addUser(User u) throws Exception {
         ArrayList<User> users = getUsers();
+        for (User user: users){
+            if (Objects.equals(user.getUserId(), u.getUserId()))
+                throw new Exception("UserID already exits! ");
+        }
         users.add(u);
         setUsers(users);
     }

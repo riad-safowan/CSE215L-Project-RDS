@@ -11,11 +11,11 @@ public class AdvisingUI {
     static void homeScreen(User user) {
 
         currentUser = user;
-        System.out.println("Welcome " + user.getUsername());
+        System.out.println("Welcome " + user.getUserId());
         boolean isDone = false;
 
         do {
-            System.out.println("1. See offered course list");
+            System.out.println("\n1. See offered course list");
             System.out.println("2. Add a new course");
             System.out.println("3. Remove a course");
             System.out.println("0. Back");

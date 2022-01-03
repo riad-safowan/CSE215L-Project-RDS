@@ -30,7 +30,7 @@ public class StudentRepository {
         try {
             FileWriter myWriter = new FileWriter(Const.ALL_STUDENT_LIST);
             for (Student s : students) {
-                myWriter.write(s.getUsername() + " " + s.getPassword() + " " + s.isAdmin() + " " + s.getAddedBy() + " " + s.getFullName() + " " + s.getUnpaidAmount() + "\n");
+                myWriter.write(s.getUserId() + " " + s.getPassword() + " " + s.isAdmin() + " " + s.getAddedBy() + " " + s.getFullName() + " " + s.getUnpaidAmount() + "\n");
             }
             myWriter.close();
         } catch (IOException e) {
@@ -38,7 +38,7 @@ public class StudentRepository {
         }
     }
 
-    public static void addStudent(Student s) {
+    public static void addStudent(Student s) throws Exception {
         ArrayList<Student> students = getStudents();
         students.add(s);
         UserRepository.addUser(s);

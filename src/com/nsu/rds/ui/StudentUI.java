@@ -15,7 +15,7 @@ public class StudentUI {
         boolean isDone = false;
 
         do {
-            System.out.println("1. See your information");
+            System.out.println("\n1. See your information");
             System.out.println("2. Advising window");
             System.out.println("0. Logout");
 

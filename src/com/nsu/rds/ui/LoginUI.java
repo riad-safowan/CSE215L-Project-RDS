@@ -14,14 +14,14 @@ public class LoginUI {
         UI.showWelcome();
         boolean isSuccess = false;
         do {
-            System.out.println("Login");
-            System.out.print("Enter Username: ");
-            String username = scanner.next();
+            System.out.println("\nLogin");
+            System.out.print("Enter UserID: ");
+            String userId = scanner.next();
             System.out.print("Enter Password: ");
             String password = scanner.next();
 
-            User user = loginSuccess(username, password);
-            if (user.getUsername() != null && !user.getUsername().isEmpty()) {
+            User user = loginSuccess(userId, password);
+            if (user.getUserId() != null && !user.getUserId().isEmpty()) {
                 isSuccess = true;
                 if (user.isAdmin()) {
                     AdminUI.homeScreen(user);
@@ -29,7 +29,7 @@ public class LoginUI {
                     StudentUI.homeScreen(user);
                 }
             } else {
-                System.out.println("Username or password is incorrect");
+                System.out.println("UserID or password is incorrect");
             }
         } while (!isSuccess);
     }
@@ -37,7 +37,7 @@ public class LoginUI {
     private static User loginSuccess(String username, String password) {
         ArrayList<User> users = UserRepository.getUsers();
         for (User user : users) {
-            if (Objects.equals(user.getUsername(), username)) {
+            if (Objects.equals(user.getUserId(), username)) {
                 if (Objects.equals(user.getPassword(), password)) return user;
             }
         }

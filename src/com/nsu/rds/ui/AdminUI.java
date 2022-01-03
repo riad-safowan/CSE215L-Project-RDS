@@ -6,6 +6,7 @@ import src.com.nsu.rds.data.repositories.StudentRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class AdminUI {
@@ -18,7 +19,7 @@ public class AdminUI {
         boolean isDone = false;
 
         do {
-            System.out.println("1. See student list");
+            System.out.println("\n1. See student list");
             System.out.println("2. Add a new student");
             System.out.println("3. Remove a student");
             System.out.println("4. Edit a student data");
@@ -75,17 +76,32 @@ public class AdminUI {
     }
 
     private static void addStudent() {
-        System.out.print("Enter First Name: ");
-        String firstName = scanner.next();
-        System.out.print("Enter Last Name: ");
-        String lastName = scanner.next();
-        System.out.print("Set a password: ");
-        String password = scanner.next();
-//        System.out.println("Re-enter the password: ");
-//        String rePassword = scanner.next();
+        boolean isSuccess = false;
+        do {
+            System.out.print("\nEnter NSU ID (0 to back): ");
+            String userId = scanner.next();
+            if (Objects.equals(userId, "0")) break;
+            System.out.print("Enter First Name: ");
+            String firstName = scanner.next();
+            System.out.print("Enter Last Name: ");
+            String lastName = scanner.next();
+            System.out.print("Set a password: ");
+            String password = scanner.next();
+            System.out.print("Re-enter the password: ");
+            String rePassword = scanner.next();
+            if (!Objects.equals(password, rePassword)) {
+                System.out.println("Password did not match");
+                continue;
+            }
 
-        Student student = new Student(firstName + "." + lastName, password, false, currentUser.getUsername(), firstName, lastName, List.of(), 0.0);
-        StudentRepository.addStudent(student);
+            Student student = new Student(userId, password, false, currentUser.getUserId(), firstName, lastName, List.of(), 0.0);
+            try {
+                StudentRepository.addStudent(student);
+                isSuccess = true;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!isSuccess);
     }
 
     private static void studentList() {

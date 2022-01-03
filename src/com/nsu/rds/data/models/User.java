@@ -1,7 +1,7 @@
 package src.com.nsu.rds.data.models;
 
 public class User {
-    private String username;
+    private String userId;
     private String password;
     private String firstName;
     private String lastName;
@@ -11,8 +11,8 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, boolean isAdmin, String addedBy,  String firstName, String lastName) {
-        this.username = username;
+    public User(String userId, String password, boolean isAdmin, String addedBy, String firstName, String lastName) {
+        this.userId = userId;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -20,12 +20,12 @@ public class User {
         this.addedBy = addedBy;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getPassword() {
