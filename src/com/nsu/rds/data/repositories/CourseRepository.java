@@ -69,29 +69,13 @@ public class CourseRepository {
         }
     }
 
-    public static void setCourses(String userId, ArrayList<Courses> courses) {
-        try {
-            FileWriter myWriter = new FileWriter(Const.getCourseFileName(userId));
-            for (Courses c : courses) {
-                myWriter.write(c.getInitial() + " " + c.getName() + " " + c.getCredit() + "\n");
-            }
-            myWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void addCourse(Courses c) {
         ArrayList<Courses> list = getCourses();
         list.add(c);
         setCourses(list);
     }
 
-    public static void addCourse(String userId, Courses c) {
-        ArrayList<Courses> list = getCourses(userId);
-        list.add(c);
-        setCourses(userId, list);
-    }
+
 
     public static void removeCourse(String c) {
         ArrayList<Courses> list = getCourses();
@@ -109,21 +93,7 @@ public class CourseRepository {
         setCourses(list);
     }
 
-    public static void removeCourse(String userId, String c) {
-        ArrayList<Courses> list = getCourses(userId);
-        int index = 0;
-        boolean found = false;
-        for (int i = 0; i < list.size(); i++) {
-            if (Objects.equals(list.get(i).getName(), c)) {
-                index = i;
-                found = true;
-            }
-        }
-        if (found) {
-            list.remove(index);
-        }
-        setCourses(userId, list);
-    }
+
 
 }
 

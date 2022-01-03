@@ -2,6 +2,7 @@ package src.com.nsu.rds.ui;
 
 import src.com.nsu.rds.data.repositories.UserRepository;
 import src.com.nsu.rds.data.models.User;
+import src.com.nsu.rds.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -9,12 +10,10 @@ import java.util.Scanner;
 
 public class LoginUI {
     static Scanner scanner = new Scanner(System.in);
-
     public static void showLoginScreen() {
-        UI.showWelcome();
         boolean isSuccess = false;
         do {
-            System.out.println("\nLogin");
+            Utils.printTitle("LOGIN");
             System.out.print("Enter UserID: ");
             String userId = scanner.next();
             System.out.print("Enter Password: ");
@@ -29,7 +28,7 @@ public class LoginUI {
                     StudentUI.homeScreen(user);
                 }
             } else {
-                System.out.println("UserID or password is incorrect");
+                System.out.println("UserID or password is incorrect! ");
             }
         } while (!isSuccess);
     }

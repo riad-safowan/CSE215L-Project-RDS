@@ -1,5 +1,6 @@
 package src.com.nsu.rds.data.repositories;
 
+import src.com.nsu.rds.data.models.Courses;
 import src.com.nsu.rds.data.models.Student;
 import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.utils.Const;
@@ -51,6 +52,14 @@ public class StudentRepository {
         setStudents(students);
     }
 
+    public static Student getStudentById(String userId) {
+        ArrayList<Student> list = getStudents();
+        for (Student s : list) {
+            if (Objects.equals(s.getUserId(), userId)) return s;
+        }
+        return new Student();
+    }
+
     private static void createCourseFile(Student s) {
         try {
             File myObj = new File(Const.getCourseFileName(s.getUserId()));
@@ -74,6 +83,40 @@ public class StudentRepository {
             e.printStackTrace();
         }
         return newList;
+    }
+
+    public static void addCourse(String userId, Courses c) {
+        ArrayList<Courses> list = CourseRepository.getCourses(userId);
+        list.add(c);
+        setCourses(userId, list);
+    }
+
+    public static void setCourses(String userId, ArrayList<Courses> courses) {
+        try {
+            FileWriter myWriter = new FileWriter(Const.getCourseFileName(userId));
+            for (Courses c : courses) {
+                myWriter.write(c.getInitial() + " " + c.getName() + " " + c.getCredit() + "\n");
+            }
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void removeCourse(String userId, String c) {
+        ArrayList<Courses> list = CourseRepository.getCourses(userId);
+        int index = 0;
+        boolean found = false;
+        for (int i = 0; i < list.size(); i++) {
+            if (Objects.equals(list.get(i).getName(), c)) {
+                index = i;
+                found = true;
+            }
+        }
+        if (found) {
+            list.remove(index);
+        }
+        setCourses(userId, list);
     }
 
 }
