@@ -11,7 +11,7 @@ public class StudentUI {
     static void homeScreen(User user) {
 
         currentUser = user;
-        System.out.println("Welcome " + user.getUsername());
+        System.out.println("Welcome " + user.getFullName());
         boolean isDone = false;
 
         do {

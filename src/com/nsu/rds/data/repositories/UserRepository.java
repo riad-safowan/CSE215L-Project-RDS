@@ -13,14 +13,14 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class UserRepository {
-    private static ArrayList<User> users = new ArrayList<>();
+    public static ArrayList<User> users = new ArrayList<>();
 
-    static void init() {
+    public static void init() {
         users.addAll(List.of(
-                new User("riad", "12345", true, "Developer"),
-                new User("abir", "12345", true, "Developer"),
-                new User("rubayet", "12345", false, "Developer")
+                new User("a", "1", true, "Developer", "Test", "Admin"),
+                new User("u", "1", false, "Developer", "Test", "User")
         ));
+        setUsers(users);
     }
 
     public static ArrayList<User> getUsers() {
@@ -29,7 +29,7 @@ public class UserRepository {
             File myObj = new File(Const.ALL_USER_LIST);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNext()) {
-                newList.add(new User(myReader.next(), myReader.next(), !Objects.equals(myReader.next(), "false"), myReader.next()));
+                newList.add(new User(myReader.next(), myReader.next(), !Objects.equals(myReader.next(), "false"), myReader.next(), myReader.next(), myReader.next()));
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -39,11 +39,10 @@ public class UserRepository {
     }
 
     public static void setUsers(ArrayList<User> users) {
-//                init();
         try {
             FileWriter myWriter = new FileWriter(Const.ALL_USER_LIST);
             for (User u : users) {
-                myWriter.write(u.getUsername() + " " + u.getPassword() + " " + u.isAdmin() + " " + u.getAddedBy() + "\n");
+                myWriter.write(u.getUsername() + " " + u.getPassword() + " " + u.isAdmin() + " " + u.getAddedBy() + " " + u.getFullName() + "\n");
             }
             myWriter.close();
         } catch (IOException e) {

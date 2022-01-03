@@ -12,20 +12,26 @@ public class LoginUI {
 
     public static void showLoginScreen() {
         UI.showWelcome();
-        System.out.println("Login");
-        System.out.print("Enter Username: ");
-        String username = scanner.next();
-        System.out.print("Enter Password: ");
-        String password = scanner.next();
+        boolean isSuccess = false;
+        do {
+            System.out.println("Login");
+            System.out.print("Enter Username: ");
+            String username = scanner.next();
+            System.out.print("Enter Password: ");
+            String password = scanner.next();
 
-        User user = loginSuccess(username, password);
-        if (!user.getUsername().isEmpty()) {
-            if (user.isAdmin()) {
-                AdminUI.homeScreen(user);
+            User user = loginSuccess(username, password);
+            if (user.getUsername() != null && !user.getUsername().isEmpty()) {
+                isSuccess = true;
+                if (user.isAdmin()) {
+                    AdminUI.homeScreen(user);
+                } else {
+                    StudentUI.homeScreen(user);
+                }
             } else {
-                StudentUI.homeScreen(user);
+                System.out.println("Username or password is incorrect");
             }
-        }
+        } while (!isSuccess);
     }
 
     private static User loginSuccess(String username, String password) {

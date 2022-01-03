@@ -13,9 +13,9 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class CourseRepository {
-    private static ArrayList<Courses> courses = new ArrayList<>();
+    public static ArrayList<Courses> courses = new ArrayList<>();
 
-    static void init() {
+    public static void init() {
         courses.addAll(List.of(
                 new Courses("CSE115", 3),
                 new Courses("CSE115L", 1),
@@ -24,6 +24,7 @@ public class CourseRepository {
                 new Courses("MAT116", 3),
                 new Courses("MAT120", 3),
                 new Courses("MAT130", 3)));
+        setCourses(courses);
     }
 
     public static ArrayList<Courses> getCourses() {

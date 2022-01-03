@@ -1,7 +1,11 @@
 package src.com.nsu.rds.ui;
 
+import src.com.nsu.rds.data.models.Student;
 import src.com.nsu.rds.data.models.User;
+import src.com.nsu.rds.data.repositories.StudentRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class AdminUI {
@@ -10,7 +14,7 @@ public class AdminUI {
 
     static void homeScreen(User user) {
         currentUser = user;
-        System.out.println("Welcome " + user.getUsername());
+        System.out.println("Welcome " + user.getFullName());
         boolean isDone = false;
 
         do {
@@ -71,9 +75,31 @@ public class AdminUI {
     }
 
     private static void addStudent() {
+        System.out.print("Enter First Name: ");
+        String firstName = scanner.next();
+        System.out.print("Enter Last Name: ");
+        String lastName = scanner.next();
+        System.out.print("Set a password: ");
+        String password = scanner.next();
+//        System.out.println("Re-enter the password: ");
+//        String rePassword = scanner.next();
+
+        Student student = new Student(firstName + "." + lastName, password, false, currentUser.getUsername(), firstName, lastName, List.of(), 0.0);
+        StudentRepository.addStudent(student);
     }
 
     private static void studentList() {
+        ArrayList<Student> list = StudentRepository.getStudents();
+        for (Student s : list) {
+            System.out.println("Name: " + s.getFullName());
+        }
+
+//        scanner.reset();
+//        scanner.close();
+//        scanner.remove();
+        scanner = new Scanner(System.in);
+        System.out.print("Press enter to go back ");
+        scanner.nextLine();
     }
 
 }

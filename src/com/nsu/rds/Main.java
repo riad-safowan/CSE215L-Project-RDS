@@ -1,6 +1,7 @@
 package src.com.nsu.rds;
 
 import src.com.nsu.rds.data.repositories.CourseRepository;
+import src.com.nsu.rds.data.repositories.StudentRepository;
 import src.com.nsu.rds.data.repositories.UserRepository;
 import src.com.nsu.rds.data.models.Courses;
 import src.com.nsu.rds.data.models.User;
@@ -11,34 +12,11 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
+
+        UserRepository.init();
+        StudentRepository.init();
+        CourseRepository.init();
+
         LoginUI.showLoginScreen();
-
-//        for (Courses c : CourseRepository.getCourses()) {
-//            System.out.println(c.getName() + " " + c.getCredit());
-//        }
-//        System.out.println();
-//
-//        CourseRepository.addCourse(new Courses("BEN205", 3));
-//
-//        for (Courses c : CourseRepository.getCourses()) {
-//            System.out.println(c.getName() + " " + c.getCredit());
-//        }
-//        System.out.println();
-//        CourseRepository.removeCourse("CSE215");
-//
-//        for (Courses c : CourseRepository.getCourses()) {
-//            System.out.println(c.getName() + " " + c.getCredit());
-//        }
-//
-//        UserRepository.setUsers(new ArrayList<>());
-//
-//        for (User c : UserRepository.getUsers()) {
-//            System.out.println(c.getUsername() + " " + c.getPassword() + " " + c.isAdmin());
-//        }
-//
-//
-//        CourseRepository cr = new CourseRepository();
-
-
     }
 }

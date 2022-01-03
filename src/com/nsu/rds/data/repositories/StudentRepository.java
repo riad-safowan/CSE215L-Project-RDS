@@ -13,24 +13,24 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class StudentRepository {
-    private static ArrayList<Student> students = new ArrayList<>();
+    public static ArrayList<Student> students = new ArrayList<>();
 
-    static void init() {
+    public static void init() {
         students.addAll(
                 List.of(
-                        new Student("student1", "12345", false, "Developer", "FirstName", "LastName", List.of(), 0),
-                        new Student("student2", "12345", false, "Developer", "FirstName", "LastName", List.of(), 0),
-                        new Student("student3", "12345", false, "Developer", "FirstName", "LastName", List.of(), 0)
+                        new Student("s1", "1", false, "Developer", "Riad", "Safowan", List.of(), 21000),
+                        new Student("s2", "2", false, "Developer", "Rubayet", "Adbir", List.of(), 24000),
+                        new Student("s3", "3", false, "Developer", "Faisal", "Sakib", List.of(), 45000)
                 )
         );
+        setStudents(students);
     }
 
     public static void setStudents(ArrayList<Student> students) {
-        init();
         try {
             FileWriter myWriter = new FileWriter(Const.ALL_STUDENT_LIST);
             for (Student s : students) {
-                myWriter.write(s.getUsername() + " " + s.getPassword() + " "+s.getAddedBy()+" " + s.getFullName() + " " + s.getUnpaidAmount() + "\n");
+                myWriter.write(s.getUsername() + " " + s.getPassword() + " " + s.isAdmin() + " " + s.getAddedBy() + " " + s.getFullName() + " " + s.getUnpaidAmount() + "\n");
             }
             myWriter.close();
         } catch (IOException e) {
@@ -45,13 +45,13 @@ public class StudentRepository {
         setStudents(students);
     }
 
-    private static ArrayList<Student> getStudents() {
+    public static ArrayList<Student> getStudents() {
         ArrayList<Student> newList = new ArrayList<>();
         try {
             File myObj = new File(Const.ALL_STUDENT_LIST);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNext()) {
-                newList.add(new Student(myReader.next(), myReader.next(), !Objects.equals(myReader.next(), "false"),myReader.next(), myReader.next(), myReader.next(), List.of(), myReader.nextDouble()));
+                newList.add(new Student(myReader.next(), myReader.next(), !Objects.equals(myReader.next(), "false"), myReader.next(), myReader.next(), myReader.next(), List.of(), myReader.nextDouble()));
             }
             myReader.close();
         } catch (FileNotFoundException e) {

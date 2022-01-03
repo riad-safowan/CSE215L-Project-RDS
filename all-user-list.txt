@@ -1,3 +1,2 @@
-riad 12345 true
-abir 12345 true
-rubayet 12345 false
+a 1 true Developer Test Admin
+u 1 false Developer Test User
