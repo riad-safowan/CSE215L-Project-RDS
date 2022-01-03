@@ -85,12 +85,6 @@ public class StudentRepository {
         return newList;
     }
 
-    public static void addCourse(String userId, Courses c) {
-        ArrayList<Courses> list = CourseRepository.getCourses(userId);
-        list.add(c);
-        setCourses(userId, list);
-    }
-
     public static void setCourses(String userId, ArrayList<Courses> courses) {
         try {
             FileWriter myWriter = new FileWriter(Const.getCourseFileName(userId));
@@ -103,8 +97,27 @@ public class StudentRepository {
         }
     }
 
+    public static ArrayList<Courses> getCourses(String userId) {
+        ArrayList<Courses> newList = new ArrayList<>();
+        try {
+            File myObj = new File(Const.getCourseFileName(userId));
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNext()) {
+                newList.add(new Courses(myReader.next(), myReader.next(), myReader.nextInt()));
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return newList;
+    }
+    public static void addCourse(String userId, Courses c) {
+        ArrayList<Courses> list = getCourses(userId);
+        list.add(c);
+        setCourses(userId, list);
+    }
     public static void removeCourse(String userId, String c) {
-        ArrayList<Courses> list = CourseRepository.getCourses(userId);
+        ArrayList<Courses> list = getCourses(userId);
         int index = 0;
         boolean found = false;
         for (int i = 0; i < list.size(); i++) {

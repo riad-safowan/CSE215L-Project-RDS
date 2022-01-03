@@ -38,7 +38,7 @@ public class AdvisingUI {
                 default -> System.out.println("Wrong Input! Select Again: ");
             }
         } while (!isDone);
-        LoginUI.showLoginScreen();
+        StudentUI.homeScreen(user);
     }
 
     private static void printAdvisingSlip() {
@@ -46,21 +46,21 @@ public class AdvisingUI {
     }
 
     private static void myCourseList() {
-        for (Courses c : CourseRepository.getCourses(currentUser.getUserId())) {
+        for (Courses c : StudentRepository.getCourses(currentUser.getUserId())) {
             System.out.println(c.getInitial() + "  " + c.getName() + "  " + c.getCredit());
         }
         System.out.println();
     }
 
     private static void removeCourse() {
-        ArrayList<Courses> cList = CourseRepository.getCourses(currentUser.getUserId());
+        ArrayList<Courses> cList = StudentRepository.getCourses(currentUser.getUserId());
         for (int i = 0; i < cList.size(); i++) {
             System.out.println(i + 1 + " : " + cList.get(i).getInitial() + "  " + cList.get(i).getName() + "  " + cList.get(i).getCredit());
         }
         System.out.print("Enter Course no: ");
         int no = scanner.nextInt();
         cList.remove(no - 1);
-        CourseRepository.setCourses(cList);
+        StudentRepository.setCourses(currentUser.getUserId(), cList);
         System.out.println();
     }
 
@@ -77,6 +77,7 @@ public class AdvisingUI {
     }
 
     private static void offeredCourseList() {
+        System.out.println();
         for (Courses c : CourseRepository.getCourses()) {
             System.out.println(c.getInitial() + "  " + c.getName() + "  " + c.getCredit());
         }

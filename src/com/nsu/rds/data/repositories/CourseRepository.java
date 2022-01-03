@@ -42,21 +42,6 @@ public class CourseRepository {
         return newList;
     }
 
-    public static ArrayList<Courses> getCourses(String userId) {
-        ArrayList<Courses> newList = new ArrayList<>();
-        try {
-            File myObj = new File(Const.getCourseFileName(userId));
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNext()) {
-                newList.add(new Courses(myReader.next(), myReader.next(), myReader.nextInt()));
-            }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return newList;
-    }
-
     public static void setCourses(ArrayList<Courses> courses) {
         try {
             FileWriter myWriter = new FileWriter(Const.ALL_COURSE_LIST);
