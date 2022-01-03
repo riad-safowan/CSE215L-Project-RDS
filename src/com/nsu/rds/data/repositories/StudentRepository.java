@@ -1,6 +1,7 @@
 package src.com.nsu.rds.data.repositories;
 
 import src.com.nsu.rds.data.models.Student;
+import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.utils.Const;
 
 import java.io.File;
@@ -27,12 +28,16 @@ public class StudentRepository {
     }
 
     public static void setStudents(ArrayList<Student> students) {
+        ArrayList<User> users = new ArrayList(students);
+        users.addAll(UserRepository.getUsers());
+        UserRepository.setUsers(users);
         try {
             FileWriter myWriter = new FileWriter(Const.ALL_STUDENT_LIST);
             for (Student s : students) {
                 myWriter.write(s.getUserId() + " " + s.getPassword() + " " + s.isAdmin() + " " + s.getAddedBy() + " " + s.getFullName() + " " + s.getUnpaidAmount() + "\n");
             }
             myWriter.close();
+            for (Student s : students) createCourseFile(s);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,7 +47,18 @@ public class StudentRepository {
         ArrayList<Student> students = getStudents();
         students.add(s);
         UserRepository.addUser(s);
+        createCourseFile(s);
         setStudents(students);
+    }
+
+    private static void createCourseFile(Student s) {
+        try {
+            File myObj = new File(s.getUserId() + Const.ALL_COURSE_LIST);
+            myObj.createNewFile();
+        } catch (IOException e) {
+            System.out.println("An error occurred creating file.");
+            e.printStackTrace();
+        }
     }
 
     public static ArrayList<Student> getStudents() {

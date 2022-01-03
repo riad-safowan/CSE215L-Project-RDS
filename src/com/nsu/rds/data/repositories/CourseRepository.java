@@ -17,13 +17,13 @@ public class CourseRepository {
 
     public static void init() {
         courses.addAll(List.of(
-                new Courses("CSE115", 3),
-                new Courses("CSE115L", 1),
-                new Courses("CSE215", 3),
-                new Courses("CSE215L", 1),
-                new Courses("MAT116", 3),
-                new Courses("MAT120", 3),
-                new Courses("MAT130", 3)));
+                new Courses("CSE115", "Programing_language_I", 3),
+                new Courses("CSE115L", "Programing_language_I_Lab", 1),
+                new Courses("CSE215", "Programing_language_II", 3),
+                new Courses("CSE215L", "Programing_language_II_Lab", 1),
+                new Courses("MAT116", "Precalculus", 3),
+                new Courses("MAT120", "Calculus_I", 3),
+                new Courses("MAT130", "Calculus_II", 3)));
         setCourses(courses);
     }
 
@@ -33,7 +33,22 @@ public class CourseRepository {
             File myObj = new File(Const.ALL_COURSE_LIST);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNext()) {
-                newList.add(new Courses(myReader.next(), myReader.nextInt()));
+                newList.add(new Courses(myReader.next(), myReader.next(), myReader.nextInt()));
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return newList;
+    }
+
+    public static ArrayList<Courses> getCourses(String userId) {
+        ArrayList<Courses> newList = new ArrayList<>();
+        try {
+            File myObj = new File(userId + Const.ALL_COURSE_LIST);
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNext()) {
+                newList.add(new Courses(myReader.next(), myReader.next(), myReader.nextInt()));
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -43,11 +58,22 @@ public class CourseRepository {
     }
 
     public static void setCourses(ArrayList<Courses> courses) {
-//        init();
         try {
             FileWriter myWriter = new FileWriter(Const.ALL_COURSE_LIST);
             for (Courses c : courses) {
-                myWriter.write(c.getName() + " " + c.getCredit() + "\n");
+                myWriter.write(c.getInitial() + " " + c.getName() + " " + c.getCredit() + "\n");
+            }
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void setCourses(String userId, ArrayList<Courses> courses) {
+        try {
+            FileWriter myWriter = new FileWriter(userId + Const.ALL_COURSE_LIST);
+            for (Courses c : courses) {
+                myWriter.write(c.getInitial() + " " + c.getName() + " " + c.getCredit() + "\n");
             }
             myWriter.close();
         } catch (IOException e) {
@@ -59,6 +85,12 @@ public class CourseRepository {
         ArrayList<Courses> list = getCourses();
         list.add(c);
         setCourses(list);
+    }
+
+    public static void addCourse(String userId, Courses c) {
+        ArrayList<Courses> list = getCourses(userId);
+        list.add(c);
+        setCourses(userId, list);
     }
 
     public static void removeCourse(String c) {
@@ -76,5 +108,22 @@ public class CourseRepository {
         }
         setCourses(list);
     }
+
+    public static void removeCourse(String userId, String c) {
+        ArrayList<Courses> list = getCourses(userId);
+        int index = 0;
+        boolean found = false;
+        for (int i = 0; i < list.size(); i++) {
+            if (Objects.equals(list.get(i).getName(), c)) {
+                index = i;
+                found = true;
+            }
+        }
+        if (found) {
+            list.remove(index);
+        }
+        setCourses(userId, list);
+    }
+
 }
 
