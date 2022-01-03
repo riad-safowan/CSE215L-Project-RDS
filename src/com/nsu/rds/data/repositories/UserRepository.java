@@ -17,8 +17,8 @@ public class UserRepository {
 
     public static void init() {
         users.addAll(List.of(
-                new User("2112312", "1", true, "Developer", "Test", "Admin"),
-                new User("2112313", "1", false, "Developer", "Test", "User")
+                new User("a", "1", true, "Developer", "Test", "Admin"),
+                new User("u", "1", false, "Developer", "Test", "User")
         ));
         setUsers(users);
     }

@@ -45,7 +45,7 @@ public class CourseRepository {
     public static ArrayList<Courses> getCourses(String userId) {
         ArrayList<Courses> newList = new ArrayList<>();
         try {
-            File myObj = new File(userId + Const.ALL_COURSE_LIST);
+            File myObj = new File(Const.getCourseFileName(userId));
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNext()) {
                 newList.add(new Courses(myReader.next(), myReader.next(), myReader.nextInt()));
@@ -71,7 +71,7 @@ public class CourseRepository {
 
     public static void setCourses(String userId, ArrayList<Courses> courses) {
         try {
-            FileWriter myWriter = new FileWriter(userId + Const.ALL_COURSE_LIST);
+            FileWriter myWriter = new FileWriter(Const.getCourseFileName(userId));
             for (Courses c : courses) {
                 myWriter.write(c.getInitial() + " " + c.getName() + " " + c.getCredit() + "\n");
             }

@@ -53,7 +53,7 @@ public class StudentRepository {
 
     private static void createCourseFile(Student s) {
         try {
-            File myObj = new File(s.getUserId() + Const.ALL_COURSE_LIST);
+            File myObj = new File(Const.getCourseFileName(s.getUserId()));
             myObj.createNewFile();
         } catch (IOException e) {
             System.out.println("An error occurred creating file.");
