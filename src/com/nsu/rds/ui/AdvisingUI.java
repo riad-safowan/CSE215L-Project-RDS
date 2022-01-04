@@ -57,10 +57,13 @@ public class AdvisingUI {
         for (int i = 0; i < cList.size(); i++) {
             System.out.println(i + 1 + " : " + cList.get(i).getInitial() + "  " + cList.get(i).getName() + "  " + cList.get(i).getCredit());
         }
-        System.out.print("Enter Course no: ");
+        System.out.print("Enter Course no to remove(0 to back): ");
         int no = scanner.nextInt();
-        cList.remove(no - 1);
-        StudentRepository.setCourses(currentUser.getUserId(), cList);
+        if(no == 0) {
+            System.out.println();
+            return;
+        }
+        StudentRepository.removeCourse(currentUser.getUserId(), cList.get(no - 1).getInitial());
         System.out.println();
     }
 
@@ -70,8 +73,12 @@ public class AdvisingUI {
         for (int i = 0; i < cList.size(); i++) {
             System.out.println(i + 1 + " : " + cList.get(i).getInitial() + "  " + cList.get(i).getName() + "  " + cList.get(i).getCredit());
         }
-        System.out.print("Enter Course no: ");
+        System.out.print("Enter Course no to remove(0 to back): ");
         int no = scanner.nextInt();
+        if(no == 0) {
+            System.out.println();
+            return;
+        }
         StudentRepository.addCourse(currentUser.getUserId(), cList.get(no - 1));
         System.out.println();
     }

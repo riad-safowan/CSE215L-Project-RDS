@@ -11,9 +11,10 @@ public class Utils {
         System.out.println("\n" + line + " " + text + " " + ((text.length() % 2 == 1) ? line + "=" : line));
     }
 
-    public static void initializeWithDummyData() {
+    public static void populateWithDummyData() {
         UserRepository.init();
         StudentRepository.init();
         CourseRepository.init();
+        StudentRepository.setCourses(StudentRepository.getStudents().get(0).getUserId(), CourseRepository.getCourses());
     }
 }

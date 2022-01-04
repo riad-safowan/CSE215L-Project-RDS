@@ -56,6 +56,21 @@ public class AdminUI {
     }
 
     private static void removeCourse() {
+        Utils.printTitle("ALL COURSES");
+        ArrayList<Courses> cList = CourseRepository.getCourses();
+        for (int i = 0; i< cList.size(); i++) {
+            System.out.println(i+1+" - Initial: " + cList.get(i).getInitial() + " Name: " + cList.get(i).getName() + " Credit: " + cList.get(i).getCredit());
+        }
+        System.out.print("Enter Course no to remove(0 to back): ");
+        int no = scanner.nextInt();
+        if(no == 0) {
+            System.out.println();
+            return;
+        }
+        String initial = cList.get(no - 1).getInitial();
+        CourseRepository.removeCourse(initial);
+        System.out.println("### A new course added ###\n");
+        System.out.println();
     }
 
     private static void addCourse() {
@@ -87,7 +102,7 @@ public class AdminUI {
         Utils.printTitle("ALL COURSES");
         ArrayList<Courses> list = CourseRepository.getCourses();
         for (Courses c : list) {
-            System.out.println("Initial: " + c.getInitial() + " Name: " + c.getName() + "Credit: " + c.getCredit());
+            System.out.println("Initial: " + c.getInitial() + " Name: " + c.getName() + " Credit: " + c.getCredit());
         }
         scanner = new Scanner(System.in);
         System.out.print("Press enter to go back ");
@@ -140,6 +155,7 @@ public class AdminUI {
     }
 
     private static void removeStudent() {
+
     }
 
     private static void addStudent() {

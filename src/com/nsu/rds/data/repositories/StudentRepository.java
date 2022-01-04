@@ -121,7 +121,7 @@ public class StudentRepository {
         int index = 0;
         boolean found = false;
         for (int i = 0; i < list.size(); i++) {
-            if (Objects.equals(list.get(i).getName(), c)) {
+            if (Objects.equals(list.get(i).getInitial(), c)) {
                 index = i;
                 found = true;
             }

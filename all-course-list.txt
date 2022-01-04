@@ -7,4 +7,4 @@ MAT120 Calculus_I 3
 MAT130 Calculus_II 3
 MAT250 Calculus_III 3
 PHY107 Physics_I 3
-PHY108 Physics_Ii 3
+PHY108 Physics_II 3

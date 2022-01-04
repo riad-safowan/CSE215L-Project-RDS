@@ -1,7 +1,7 @@
 package src.com.nsu.rds.data.repositories;
 
 import src.com.nsu.rds.data.models.Courses;
-import src.com.nsu.rds.data.models.User;
+import src.com.nsu.rds.data.models.Student;
 import src.com.nsu.rds.utils.Const;
 
 import java.io.File;
@@ -27,7 +27,7 @@ public class CourseRepository {
                 new Courses("MAT130", "Calculus_II", 3),
                 new Courses("MAT250", "Calculus_III", 3),
                 new Courses("PHY107", "Physics_I", 3),
-                new Courses("PHY108", "Physics_Ii", 3)
+                new Courses("PHY108", "Physics_II", 3)
         ));
         setCourses(courses);
     }
@@ -69,19 +69,21 @@ public class CourseRepository {
         setCourses(list);
     }
 
-
     public static void removeCourse(String c) {
         ArrayList<Courses> list = getCourses();
         int index = 0;
         boolean found = false;
         for (int i = 0; i < list.size(); i++) {
-            if (Objects.equals(list.get(i).getName(), c)) {
+            if (Objects.equals(list.get(i).getInitial(), c)) {
                 index = i;
                 found = true;
             }
         }
         if (found) {
             list.remove(index);
+            for (Student student : StudentRepository.getStudents()) {
+                StudentRepository.removeCourse(student.getUserId(), c);
+            }
         }
         setCourses(list);
     }
