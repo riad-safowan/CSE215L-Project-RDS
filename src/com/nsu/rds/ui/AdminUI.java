@@ -77,14 +77,14 @@ public class AdminUI {
         }
         System.out.print("Enter Course no to remove(0 to back): ");
         int no = scanner.nextInt();
-        if (no == 0) {
+        if (no == 0) System.out.println();
+        else if (no > cList.size()) System.out.println("Invalid Input!!\n");
+        else {
+            String initial = cList.get(no - 1).getInitial();
+            CourseRepository.removeCourse(initial);
+            System.out.println("### A new course removed ###\n");
             System.out.println();
-            return;
         }
-        String initial = cList.get(no - 1).getInitial();
-        CourseRepository.removeCourse(initial);
-        System.out.println("### A new course removed ###\n");
-        System.out.println();
     }
 
     private static void addCourse() {
@@ -181,8 +181,9 @@ public class AdminUI {
             System.out.println();
             return;
         }
-        StudentRepository.removeStudent(id);
-        System.out.println("### A student is removed ###\n");
+        if (StudentRepository.removeStudent(id))
+            System.out.println("### A student is removed ###\n");
+        else System.out.println("Student not found with id " + id);
         System.out.println();
 
     }

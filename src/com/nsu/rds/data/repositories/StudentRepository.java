@@ -132,7 +132,7 @@ public class StudentRepository {
         setCourses(userId, list);
     }
 
-    public static void removeStudent(String id) {
+    public static boolean removeStudent(String id) {
         ArrayList<Student> list = getStudents();
         int index = 0;
         boolean found = false;
@@ -145,7 +145,9 @@ public class StudentRepository {
         if (found) {
             list.remove(index);
             UserRepository.removeUser(id);
+
         }
         setStudents(list);
+        return found;
     }
 }

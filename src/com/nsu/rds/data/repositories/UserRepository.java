@@ -1,6 +1,5 @@
 package src.com.nsu.rds.data.repositories;
 
-import src.com.nsu.rds.data.models.Student;
 import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.utils.Const;
 

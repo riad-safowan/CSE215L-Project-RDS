@@ -59,12 +59,12 @@ public class AdvisingUI {
         }
         System.out.print("Enter Course no to remove(0 to back): ");
         int no = scanner.nextInt();
-        if(no == 0) {
+        if (no == 0) System.out.println();
+        else if (no > cList.size()) System.out.println("Invalid input!!\n");
+        else {
+            StudentRepository.removeCourse(currentUser.getUserId(), cList.get(no - 1).getInitial());
             System.out.println();
-            return;
         }
-        StudentRepository.removeCourse(currentUser.getUserId(), cList.get(no - 1).getInitial());
-        System.out.println();
     }
 
     private static void addCourse() {
@@ -75,12 +75,12 @@ public class AdvisingUI {
         }
         System.out.print("Enter Course no to remove(0 to back): ");
         int no = scanner.nextInt();
-        if(no == 0) {
+        if (no == 0) System.out.println();
+        else if (no > cList.size()) System.out.println("Invalid input!!\n");
+        else {
+            StudentRepository.addCourse(currentUser.getUserId(), cList.get(no - 1));
             System.out.println();
-            return;
         }
-        StudentRepository.addCourse(currentUser.getUserId(), cList.get(no - 1));
-        System.out.println();
     }
 
     private static void offeredCourseList() {
