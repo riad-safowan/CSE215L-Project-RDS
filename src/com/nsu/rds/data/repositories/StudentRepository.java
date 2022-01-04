@@ -132,4 +132,20 @@ public class StudentRepository {
         setCourses(userId, list);
     }
 
+    public static void removeStudent(String id) {
+        ArrayList<Student> list = getStudents();
+        int index = 0;
+        boolean found = false;
+        for (int i = 0; i < list.size(); i++) {
+            if (Objects.equals(list.get(i).getUserId(), id)) {
+                index = i;
+                found = true;
+            }
+        }
+        if (found) {
+            list.remove(index);
+            UserRepository.removeUser(id);
+        }
+        setStudents(list);
+    }
 }

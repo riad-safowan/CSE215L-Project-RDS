@@ -33,6 +33,7 @@ public class AdminUI {
             System.out.println("8 -> Booked course list");
             System.out.println("9 -> Add a new course");
             System.out.println("10 -> Remove a Course");
+            System.out.println("11 -> All user list");
             System.out.println("0 -> Logout");
 
             System.out.print("Select an option: ");
@@ -47,6 +48,7 @@ public class AdminUI {
                 case 8 -> bookedCoursesData();
                 case 9 -> addCourse();
                 case 10 -> removeCourse();
+                case 11 -> allUserList();
                 case 0 -> isDone = true;
                 default -> System.out.println("Wrong Input! Select Again: ");
             }
@@ -55,21 +57,33 @@ public class AdminUI {
         LoginUI.showLoginScreen();
     }
 
+    private static void allUserList() {
+        Utils.printTitle("ALL USERS");
+        ArrayList<User> list = UserRepository.getUsers();
+        for (User s : list) {
+            System.out.println("Name: " + s.getFullName() + " ID: " + s.getUserId() + " " + (s.isAdmin() ? "ADMIN" : "STUDENT") + " Added by: " + s.getAddedBy());
+        }
+        scanner = new Scanner(System.in);
+        System.out.print("Press enter to go back ");
+        scanner.nextLine();
+        System.out.println();
+    }
+
     private static void removeCourse() {
         Utils.printTitle("ALL COURSES");
         ArrayList<Courses> cList = CourseRepository.getCourses();
-        for (int i = 0; i< cList.size(); i++) {
-            System.out.println(i+1+" - Initial: " + cList.get(i).getInitial() + " Name: " + cList.get(i).getName() + " Credit: " + cList.get(i).getCredit());
+        for (int i = 0; i < cList.size(); i++) {
+            System.out.println(i + 1 + " - Initial: " + cList.get(i).getInitial() + " Name: " + cList.get(i).getName() + " Credit: " + cList.get(i).getCredit());
         }
         System.out.print("Enter Course no to remove(0 to back): ");
         int no = scanner.nextInt();
-        if(no == 0) {
+        if (no == 0) {
             System.out.println();
             return;
         }
         String initial = cList.get(no - 1).getInitial();
         CourseRepository.removeCourse(initial);
-        System.out.println("### A new course added ###\n");
+        System.out.println("### A new course removed ###\n");
         System.out.println();
     }
 
@@ -155,6 +169,21 @@ public class AdminUI {
     }
 
     private static void removeStudent() {
+        Utils.printTitle("REMOVE A STUDENT");
+        ArrayList<Student> list = StudentRepository.getStudents();
+        for (Student student : list) {
+            System.out.println("Name: " + student.getFullName() + " ID: " + student.getUserId() + " Due Amount: BDT" + student.getUnpaidAmount());
+        }
+        System.out.print("Enter Student ID to remove(0 to back): ");
+        scanner = new Scanner(System.in);
+        String id = scanner.next();
+        if (Objects.equals(id, "0")) {
+            System.out.println();
+            return;
+        }
+        StudentRepository.removeStudent(id);
+        System.out.println("### A student is removed ###\n");
+        System.out.println();
 
     }
 
@@ -164,7 +193,10 @@ public class AdminUI {
         do {
             System.out.print("Enter NSU ID (0 to back): ");
             String userId = scanner.next();
-            if (Objects.equals(userId, "0")) break;
+            if (Objects.equals(userId, "0")) {
+                System.out.println();
+                break;
+            }
             System.out.print("Enter First Name: ");
             String firstName = scanner.next();
             System.out.print("Enter Last Name: ");
@@ -183,6 +215,7 @@ public class AdminUI {
                 StudentRepository.addStudent(student);
                 isSuccess = true;
                 System.out.println("### A new student added ###\n");
+                System.out.println();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -198,6 +231,7 @@ public class AdminUI {
         scanner = new Scanner(System.in);
         System.out.print("Press enter to go back ");
         scanner.nextLine();
+        System.out.println();
     }
 
 }

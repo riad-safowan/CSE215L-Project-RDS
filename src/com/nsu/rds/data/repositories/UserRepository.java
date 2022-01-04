@@ -1,5 +1,6 @@
 package src.com.nsu.rds.data.repositories;
 
+import src.com.nsu.rds.data.models.Student;
 import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.utils.Const;
 
@@ -67,5 +68,32 @@ public class UserRepository {
             if (u.isAdmin()) admins.add(u);
         }
         return admins;
+    }
+
+    public static ArrayList<User> getStudents() {
+        ArrayList<User> allUsers = getUsers();
+        ArrayList<User> students = new ArrayList<>();
+
+        for (User u : allUsers) {
+            if (!u.isAdmin()) students.add(u);
+        }
+        return students;
+    }
+
+    public static void removeUser(String id) {
+        ArrayList<User> list = getUsers();
+        int index = 0;
+        boolean found = false;
+        for (int i = 0; i < list.size(); i++) {
+            if (Objects.equals(list.get(i).getUserId(), id)) {
+                index = i;
+                found = true;
+            }
+        }
+        if (found) {
+            list.remove(index);
+            System.out.println("removed");
+        }
+        setUsers(list);
     }
 }
