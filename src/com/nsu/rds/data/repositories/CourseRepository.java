@@ -23,7 +23,11 @@ public class CourseRepository {
                 new Courses("CSE215L", "Programing_language_II_Lab", 1),
                 new Courses("MAT116", "Precalculus", 3),
                 new Courses("MAT120", "Calculus_I", 3),
-                new Courses("MAT130", "Calculus_II", 3)));
+                new Courses("MAT130", "Calculus_II", 3),
+                new Courses("MAT250", "Calculus_III", 3),
+                new Courses("PHY107", "Physics_I", 3),
+                new Courses("PHY108", "Physics_Ii", 3)
+        ));
         setCourses(courses);
     }
 
@@ -61,7 +65,6 @@ public class CourseRepository {
     }
 
 
-
     public static void removeCourse(String c) {
         ArrayList<Courses> list = getCourses();
         int index = 0;
@@ -77,7 +80,6 @@ public class CourseRepository {
         }
         setCourses(list);
     }
-
 
 
 }

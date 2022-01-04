@@ -41,7 +41,7 @@ public class StudentUI {
         Utils.printTitle("YOUR INFO");
         System.out.println("ID: " + currentUser.getUserId());
         System.out.println("Name: " + currentUser.getFullName());
-        System.out.println("To Pay: BDT " + currentUser.getUnpaidAmount());
+        System.out.println("To Pay: BDT" + currentUser.getUnpaidAmount());
         System.out.println();
     }
 }

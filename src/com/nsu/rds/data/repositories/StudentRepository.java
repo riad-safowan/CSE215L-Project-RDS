@@ -20,9 +20,7 @@ public class StudentRepository {
     public static void init() {
         students.addAll(
                 List.of(
-                        new Student("s1", "1", false, "Developer", "Riad", "Safowan", List.of(), 21000),
-                        new Student("s2", "2", false, "Developer", "Rubayet", "Adbir", List.of(), 24000),
-                        new Student("s3", "3", false, "Developer", "Faisal", "Sakib", List.of(), 45000)
+                        new Student("s", "1", false, "Developer", "Riad", "Safowan", List.of(), 21000)
                 )
         );
         setStudents(students);
@@ -47,7 +45,7 @@ public class StudentRepository {
     public static void addStudent(Student s) throws Exception {
         ArrayList<Student> students = getStudents();
         students.add(s);
-        UserRepository.addUser(s);
+        UserRepository.addUser(s); //throws exception if user already exist
         createCourseFile(s);
         setStudents(students);
     }
@@ -111,11 +109,13 @@ public class StudentRepository {
         }
         return newList;
     }
+
     public static void addCourse(String userId, Courses c) {
         ArrayList<Courses> list = getCourses(userId);
         list.add(c);
         setCourses(userId, list);
     }
+
     public static void removeCourse(String userId, String c) {
         ArrayList<Courses> list = getCourses(userId);
         int index = 0;

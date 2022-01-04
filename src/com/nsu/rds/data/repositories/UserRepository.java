@@ -17,8 +17,7 @@ public class UserRepository {
 
     public static void init() {
         users.addAll(List.of(
-                new User("a", "1", true, "Developer", "Test", "Admin"),
-                new User("u", "1", false, "Developer", "Test", "User")
+                new User("a", "1", true, "Developer", "Test", "Admin")
         ));
         setUsers(users);
     }
@@ -52,11 +51,21 @@ public class UserRepository {
 
     public static void addUser(User u) throws Exception {
         ArrayList<User> users = getUsers();
-        for (User user: users){
+        for (User user : users) {
             if (Objects.equals(user.getUserId(), u.getUserId()))
                 throw new Exception("UserID already exits! ");
         }
         users.add(u);
         setUsers(users);
+    }
+
+    public static ArrayList<User> getAdmins() {
+        ArrayList<User> allUsers = getUsers();
+        ArrayList<User> admins = new ArrayList<>();
+
+        for (User u : allUsers) {
+            if (u.isAdmin()) admins.add(u);
+        }
+        return admins;
     }
 }

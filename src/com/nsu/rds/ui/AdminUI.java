@@ -3,6 +3,7 @@ package src.com.nsu.rds.ui;
 import src.com.nsu.rds.data.models.Student;
 import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.data.repositories.StudentRepository;
+import src.com.nsu.rds.data.repositories.UserRepository;
 import src.com.nsu.rds.utils.Utils;
 
 import java.util.ArrayList;
@@ -65,21 +66,10 @@ public class AdminUI {
     }
 
     private static void addAdmin() {
-    }
-
-    private static void adminList() {
-    }
-
-    private static void editStudent() {
-    }
-
-    private static void removeStudent() {
-    }
-
-    private static void addStudent() {
+        Utils.printTitle("ADMIN FORM");
         boolean isSuccess = false;
         do {
-            System.out.print("\nEnter NSU ID (0 to back): ");
+            System.out.print("Enter ADMIN ID (0 to back): ");
             String userId = scanner.next();
             if (Objects.equals(userId, "0")) break;
             System.out.print("Enter First Name: ");
@@ -91,7 +81,55 @@ public class AdminUI {
             System.out.print("Re-enter the password: ");
             String rePassword = scanner.next();
             if (!Objects.equals(password, rePassword)) {
-                System.out.println("Password did not match");
+                System.out.println("Password did not match!!\n");
+                continue;
+            }
+
+            User user = new User(userId, password, true, currentUser.getUserId(), firstName, lastName);
+            try {
+                UserRepository.addUser(user);
+                isSuccess = true;
+                System.out.println("### A new admin added ###\n");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!isSuccess);
+    }
+
+    private static void adminList() {
+        Utils.printTitle("ALL ADMINS");
+        ArrayList<User> list = UserRepository.getAdmins();
+        for (User s : list) {
+            System.out.println("Name: " + s.getFullName() + " ID: " + s.getUserId() );
+        }
+        scanner = new Scanner(System.in);
+        System.out.print("Press enter to go back ");
+        scanner.nextLine();
+    }
+
+    private static void editStudent() {
+    }
+
+    private static void removeStudent() {
+    }
+
+    private static void addStudent() {
+        Utils.printTitle("STUDENT FORM");
+        boolean isSuccess = false;
+        do {
+            System.out.print("Enter NSU ID (0 to back): ");
+            String userId = scanner.next();
+            if (Objects.equals(userId, "0")) break;
+            System.out.print("Enter First Name: ");
+            String firstName = scanner.next();
+            System.out.print("Enter Last Name: ");
+            String lastName = scanner.next();
+            System.out.print("Set a password: ");
+            String password = scanner.next();
+            System.out.print("Re-enter the password: ");
+            String rePassword = scanner.next();
+            if (!Objects.equals(password, rePassword)) {
+                System.out.println("Password did not match!!\n");
                 continue;
             }
 
@@ -99,6 +137,7 @@ public class AdminUI {
             try {
                 StudentRepository.addStudent(student);
                 isSuccess = true;
+                System.out.println("### A new student added ###\n");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -106,14 +145,11 @@ public class AdminUI {
     }
 
     private static void studentList() {
+        Utils.printTitle("ALL STUDENTS");
         ArrayList<Student> list = StudentRepository.getStudents();
         for (Student s : list) {
-            System.out.println("Name: " + s.getFullName());
+            System.out.println("Name: " + s.getFullName() + " ID: " + s.getUserId() + " Due Amount: BDT" + s.getUnpaidAmount());
         }
-
-//        scanner.reset();
-//        scanner.close();
-//        scanner.remove();
         scanner = new Scanner(System.in);
         System.out.print("Press enter to go back ");
         scanner.nextLine();

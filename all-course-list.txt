@@ -5,3 +5,6 @@ CSE215L Programing_language_II_Lab 1
 MAT116 Precalculus 3
 MAT120 Calculus_I 3
 MAT130 Calculus_II 3
+MAT250 Calculus_III 3
+PHY107 Physics_I 3
+PHY108 Physics_Ii 3
