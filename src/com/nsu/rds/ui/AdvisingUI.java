@@ -47,7 +47,7 @@ public class AdvisingUI {
 
     private static void myCourseList() {
         for (Courses c : StudentRepository.getCourses(currentUser.getUserId())) {
-            System.out.println(c.getInitial() + "  " + c.getName() + "  " + c.getCredit());
+            System.out.println(String.format("%-7s", c.getInitial()) + "  " + String.format("%-30s", c.getName()) + "  " + c.getCredit());
         }
         System.out.println();
     }
@@ -55,7 +55,7 @@ public class AdvisingUI {
     private static void removeCourse() {
         ArrayList<Courses> cList = StudentRepository.getCourses(currentUser.getUserId());
         for (int i = 0; i < cList.size(); i++) {
-            System.out.println(i + 1 + " : " + cList.get(i).getInitial() + "  " + cList.get(i).getName() + "  " + cList.get(i).getCredit());
+            System.out.println(i + 1 + " : " + String.format("%-7s", cList.get(i).getInitial()) + "  " + String.format("%-30s", cList.get(i).getName()) + "  " + cList.get(i).getCredit());
         }
         System.out.print("Enter Course no to remove(0 to back): ");
         int no = scanner.nextInt();
@@ -71,7 +71,7 @@ public class AdvisingUI {
         ArrayList<Courses> cList = CourseRepository.getCourses();
 
         for (int i = 0; i < cList.size(); i++) {
-            System.out.println(i + 1 + " : " + cList.get(i).getInitial() + "  " + cList.get(i).getName() + "  " + cList.get(i).getCredit());
+            System.out.println(i + 1 + " : " + String.format("%-7s", cList.get(i).getInitial()) + "  " + String.format("%-30s", cList.get(i).getName()) + "  " + cList.get(i).getCredit());
         }
         System.out.print("Enter Course no to remove(0 to back): ");
         int no = scanner.nextInt();
@@ -86,7 +86,7 @@ public class AdvisingUI {
     private static void offeredCourseList() {
         System.out.println();
         for (Courses c : CourseRepository.getCourses()) {
-            System.out.println(c.getInitial() + "  " + c.getName() + "  " + c.getCredit());
+            System.out.println(String.format("%-7s", c.getInitial()) + "  " + String.format("%-30s", c.getName()) + "  " + c.getCredit());
         }
         System.out.println();
     }
