@@ -1,7 +1,9 @@
 package src.com.nsu.rds.ui;
 
+import src.com.nsu.rds.data.models.Courses;
 import src.com.nsu.rds.data.models.Student;
 import src.com.nsu.rds.data.models.User;
+import src.com.nsu.rds.data.repositories.CourseRepository;
 import src.com.nsu.rds.data.repositories.StudentRepository;
 import src.com.nsu.rds.data.repositories.UserRepository;
 import src.com.nsu.rds.utils.Utils;
@@ -57,12 +59,39 @@ public class AdminUI {
     }
 
     private static void addCourse() {
+        Utils.printTitle("ADD COURSE");
+        boolean isSuccess = false;
+        do {
+            System.out.print("Enter Course initial (0 to back): ");
+            String initial = scanner.next();
+            if (Objects.equals(initial, "0")) break;
+            System.out.print("Enter Course Name: ");
+            String name = scanner.next();
+            System.out.print("Enter Course credit: ");
+            int credit = scanner.nextInt();
+            Courses courses = new Courses(initial, name, credit);
+            try {
+                CourseRepository.addCourse(courses);
+                isSuccess = true;
+                System.out.println("### A new course added ###\n");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!isSuccess);
     }
 
     private static void bookedCoursesData() {
     }
 
     private static void courseList() {
+        Utils.printTitle("ALL COURSES");
+        ArrayList<Courses> list = CourseRepository.getCourses();
+        for (Courses c : list) {
+            System.out.println("Initial: " + c.getInitial() + " Name: " + c.getName() + "Credit: " + c.getCredit());
+        }
+        scanner = new Scanner(System.in);
+        System.out.print("Press enter to go back ");
+        scanner.nextLine();
     }
 
     private static void addAdmin() {
@@ -100,7 +129,7 @@ public class AdminUI {
         Utils.printTitle("ALL ADMINS");
         ArrayList<User> list = UserRepository.getAdmins();
         for (User s : list) {
-            System.out.println("Name: " + s.getFullName() + " ID: " + s.getUserId() );
+            System.out.println("Name: " + s.getFullName() + " ID: " + s.getUserId());
         }
         scanner = new Scanner(System.in);
         System.out.print("Press enter to go back ");

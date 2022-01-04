@@ -1,6 +1,7 @@
 package src.com.nsu.rds.data.repositories;
 
 import src.com.nsu.rds.data.models.Courses;
+import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.utils.Const;
 
 import java.io.File;
@@ -58,8 +59,12 @@ public class CourseRepository {
         }
     }
 
-    public static void addCourse(Courses c) {
+    public static void addCourse(Courses c) throws Exception {
         ArrayList<Courses> list = getCourses();
+        for (Courses courses : list) {
+            if (Objects.equals(courses.getInitial(), c.getInitial()))
+                throw new Exception("Course already exits! ");
+        }
         list.add(c);
         setCourses(list);
     }
