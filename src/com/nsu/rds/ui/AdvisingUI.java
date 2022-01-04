@@ -6,7 +6,12 @@ import src.com.nsu.rds.data.repositories.CourseRepository;
 import src.com.nsu.rds.data.repositories.StudentRepository;
 import src.com.nsu.rds.utils.Utils;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 public class AdvisingUI {
@@ -42,7 +47,25 @@ public class AdvisingUI {
     }
 
     private static void printAdvisingSlip() {
+        Utils.printTitle("ADVISING SLIP");
+        System.out.println();
+        System.out.println("\t\tNorth South University");
+        System.out.println("\t\tStudent Registration - Fall 2021");
+        System.out.println("\t\tDate : " + new SimpleDateFormat("EEEE, dd MMMM yyyy, hh:mm:ss a").format(Calendar.getInstance().getTime()));
+        System.out.println();
+        System.out.println("Student Name: " + String.format("%-20s", currentUser.getFullName()) + "ID# " + String.format("%-7s", currentUser.getUserId()) + "      Degree: Undergraduate");
+        System.out.println();
+        System.out.println("\t SL    Course       Credit       Tuition");
 
+        ArrayList<Courses> courses = StudentRepository.getCourses(currentUser.getUserId());
+        double total = 0;
+        for (int i = 0; i < courses.size(); i++) {
+            System.out.println("\t" + String.format("%2d", i + 1) + "     " + String.format("%-7s", courses.get(i).getInitial()) + "        " + courses.get(i).getCredit() + "          " + String.format("%-7.2f", courses.get(i).getCredit() * 6500.0));
+            total = total + courses.get(i).getCredit() * 65000.0;
+        }
+        System.out.println("\t\t\t\t\tTuition Total: " + String.format("%9.2f", total));
+
+        System.out.println();
     }
 
     private static void myCourseList() {
