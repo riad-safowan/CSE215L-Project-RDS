@@ -230,7 +230,6 @@ public class AdminUI {
         scanner.nextLine();
         System.out.println();
     }
-
 }
 
 

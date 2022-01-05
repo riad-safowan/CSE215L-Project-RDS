@@ -77,7 +77,7 @@ public class AdvisingUI {
         double discount = tuition * fee.getWaiver() / 100;
         System.out.println("\tLess: Waiver " + fee.getWaiver() + "%           " + String.format("%7.2f", discount));
         System.out.println("\t------------------------------------");
-        System.out.println("\tPayable:                     " + (tuition - discount));
+        System.out.println("\tPayable:                     " + String.format("%7.2f", (tuition - discount)));
         System.out.println();
     }
 
