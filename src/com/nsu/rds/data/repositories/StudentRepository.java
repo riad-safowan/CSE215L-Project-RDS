@@ -28,7 +28,7 @@ public class StudentRepository {
 
     public static void setStudents(ArrayList<Student> students) {
         ArrayList<User> users = new ArrayList(students);
-        users.addAll(UserRepository.getUsers());
+        users.addAll(UserRepository.getAdmins());
         UserRepository.setUsers(users);
         try {
             FileWriter myWriter = new FileWriter(Const.ALL_STUDENT_LIST);
@@ -149,5 +149,14 @@ public class StudentRepository {
         }
         setStudents(list);
         return found;
+    }
+
+    public static void updatePassword(String userId, String newP) {
+        ArrayList<Student> students = getStudents();
+        for (Student s : students) {
+            if (Objects.equals(s.getUserId(), userId)) s.setPassword(newP);
+        }
+        setStudents(students);
+
     }
 }

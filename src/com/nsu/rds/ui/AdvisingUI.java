@@ -61,9 +61,9 @@ public class AdvisingUI {
         double total = 0;
         for (int i = 0; i < courses.size(); i++) {
             System.out.println("\t" + String.format("%2d", i + 1) + "     " + String.format("%-7s", courses.get(i).getInitial()) + "        " + courses.get(i).getCredit() + "          " + String.format("%-7.2f", courses.get(i).getCredit() * 6500.0));
-            total = total + courses.get(i).getCredit() * 65000.0;
+            total = total + (courses.get(i).getCredit() * 6500.0);
         }
-        System.out.println("\t\t\t\t\tTuition Total: " + String.format("%9.2f", total));
+        System.out.println("\t\t\t\t\t  Tuition Total: " + String.format("%9.2f", total));
 
         System.out.println();
     }
