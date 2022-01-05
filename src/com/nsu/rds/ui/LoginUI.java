@@ -1,6 +1,6 @@
 package src.com.nsu.rds.ui;
 
-import src.com.nsu.rds.data.repositories.UserRepository;
+import src.com.nsu.rds.data.repositories.AdminRepository;
 import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.utils.Utils;
 
@@ -34,7 +34,7 @@ public class LoginUI {
     }
 
     private static User loginSuccess(String username, String password) {
-        ArrayList<User> users = UserRepository.getUsers();
+        ArrayList<User> users = AdminRepository.getUsers();
         for (User user : users) {
             if (Objects.equals(user.getUserId(), username)) {
                 if (Objects.equals(user.getPassword(), password)) return user;

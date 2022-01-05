@@ -1,5 +1,6 @@
 package src.com.nsu.rds.data.repositories;
 
+import src.com.nsu.rds.data.models.Fee;
 import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.utils.Const;
 
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class UserRepository {
+public class AdminRepository {
     public static ArrayList<User> users = new ArrayList<>();
 
     public static void init() {
@@ -20,6 +21,7 @@ public class UserRepository {
                 new User("a", "1", true, "Developer", "Test", "Admin")
         ));
         setUsers(users);
+        setFees(new Fee(6500, 3000, 2500, 1500, 2500, 10));
     }
 
     public static ArrayList<User> getUsers() {
@@ -95,4 +97,28 @@ public class UserRepository {
         }
         setUsers(list);
     }
+
+    public static void setFees(Fee fee) {
+        try {
+            FileWriter myWriter = new FileWriter(Const.ALL_FEES_LIST);
+            myWriter.write(fee.getCreditFee() + " " + fee.getActivityFee() + " " + fee.getComputerLabFee() + " " + fee.getLibraryFee() + " " + fee.getScienceLabFee() + " " + fee.getWaiver());
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Fee getFees() {
+        Fee fee = new Fee();
+        try {
+            File myObj = new File(Const.ALL_FEES_LIST);
+            Scanner myReader = new Scanner(myObj);
+            fee = new Fee(myReader.nextDouble(), myReader.nextDouble(), myReader.nextDouble(), myReader.nextDouble(), myReader.nextDouble(), myReader.nextDouble());
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return fee;
+    }
+
 }

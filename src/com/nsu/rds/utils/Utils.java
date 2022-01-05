@@ -2,7 +2,7 @@ package src.com.nsu.rds.utils;
 
 import src.com.nsu.rds.data.repositories.CourseRepository;
 import src.com.nsu.rds.data.repositories.StudentRepository;
-import src.com.nsu.rds.data.repositories.UserRepository;
+import src.com.nsu.rds.data.repositories.AdminRepository;
 
 public class Utils {
     public static void printTitle(String text) {
@@ -12,7 +12,7 @@ public class Utils {
     }
 
     public static void populateWithDummyData() {
-        UserRepository.init();
+        AdminRepository.init();
         StudentRepository.init();
         CourseRepository.init();
         StudentRepository.setCourses(StudentRepository.getStudents().get(0).getUserId(), CourseRepository.getCourses());

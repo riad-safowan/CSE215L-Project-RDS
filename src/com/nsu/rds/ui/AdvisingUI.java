@@ -1,17 +1,16 @@
 package src.com.nsu.rds.ui;
 
 import src.com.nsu.rds.data.models.Courses;
+import src.com.nsu.rds.data.models.Fee;
 import src.com.nsu.rds.data.models.User;
+import src.com.nsu.rds.data.repositories.AdminRepository;
 import src.com.nsu.rds.data.repositories.CourseRepository;
 import src.com.nsu.rds.data.repositories.StudentRepository;
 import src.com.nsu.rds.utils.Utils;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Scanner;
 
 public class AdvisingUI {
@@ -47,6 +46,7 @@ public class AdvisingUI {
     }
 
     private static void printAdvisingSlip() {
+        Fee fee = AdminRepository.getFees();
         Utils.printTitle("ADVISING SLIP");
         System.out.println();
         System.out.println("\t\tNorth South University");
@@ -58,13 +58,26 @@ public class AdvisingUI {
         System.out.println("\t SL    Course       Credit       Tuition");
 
         ArrayList<Courses> courses = StudentRepository.getCourses(currentUser.getUserId());
-        double total = 0;
+        double tuition = 0;
         for (int i = 0; i < courses.size(); i++) {
-            System.out.println("\t" + String.format("%2d", i + 1) + "     " + String.format("%-7s", courses.get(i).getInitial()) + "        " + courses.get(i).getCredit() + "          " + String.format("%-7.2f", courses.get(i).getCredit() * 6500.0));
-            total = total + (courses.get(i).getCredit() * 6500.0);
+            System.out.println("\t" + String.format("%2d", i + 1) + "     " + String.format("%-7s", courses.get(i).getInitial()) + "        " + courses.get(i).getCredit() + "          " + String.format("%-5.2f", courses.get(i).getCredit() * 6500.0));
+            tuition = tuition + (courses.get(i).getCredit() * fee.getCreditFee());
         }
-        System.out.println("\t\t\t\t\t  Tuition Total: " + String.format("%9.2f", total));
-
+        System.out.println("\t\t\t\t\t  Tuition Total: " + String.format("%9.2f", tuition));
+        System.out.println();
+        System.out.println("\tStudent Activity Fee         " + String.format("%7.2f", fee.getActivityFee()));
+        System.out.println("\tComputer Lab Fee             " + String.format("%7.2f", fee.getComputerLabFee()));
+        System.out.println("\tLibrary Fee                  " + String.format("%7.2f", fee.getLibraryFee()));
+        System.out.println("\tScience Lab Fee              " + String.format("%7.2f", fee.getScienceLabFee()));
+        double nonTuitionFee = fee.getActivityFee() + fee.getComputerLabFee() + fee.getLibraryFee() + fee.getScienceLabFee();
+        System.out.println("\t------------------------------------");
+        System.out.println("\tTotal:                       " + String.format("%7.2f", tuition + nonTuitionFee));
+        System.out.println();
+        System.out.println("\tLess: Non Tuition fees       " + String.format("%7.2f", nonTuitionFee));
+        double discount = tuition * fee.getWaiver() / 100;
+        System.out.println("\tLess: Waiver " + fee.getWaiver() + "%           " + String.format("%7.2f", discount));
+        System.out.println("\t------------------------------------");
+        System.out.println("\tPayable:                     " + (tuition - discount));
         System.out.println();
     }
 

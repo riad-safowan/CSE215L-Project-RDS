@@ -28,8 +28,8 @@ public class StudentRepository {
 
     public static void setStudents(ArrayList<Student> students) {
         ArrayList<User> users = new ArrayList(students);
-        users.addAll(UserRepository.getAdmins());
-        UserRepository.setUsers(users);
+        users.addAll(AdminRepository.getAdmins());
+        AdminRepository.setUsers(users);
         try {
             FileWriter myWriter = new FileWriter(Const.ALL_STUDENT_LIST);
             for (Student s : students) {
@@ -45,7 +45,7 @@ public class StudentRepository {
     public static void addStudent(Student s) throws Exception {
         ArrayList<Student> students = getStudents();
         students.add(s);
-        UserRepository.addUser(s); //throws exception if user already exist
+        AdminRepository.addUser(s); //throws exception if user already exist
         createCourseFile(s);
         setStudents(students);
     }
@@ -144,7 +144,7 @@ public class StudentRepository {
         }
         if (found) {
             list.remove(index);
-            UserRepository.removeUser(id);
+            AdminRepository.removeUser(id);
 
         }
         setStudents(list);

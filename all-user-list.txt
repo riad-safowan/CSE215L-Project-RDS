@@ -1,2 +1,2 @@
-s 2 false Developer Riad Safowan
+s 1 false Developer Riad Safowan
 a 1 true Developer Test Admin

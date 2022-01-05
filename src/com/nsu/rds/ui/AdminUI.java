@@ -5,7 +5,7 @@ import src.com.nsu.rds.data.models.Student;
 import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.data.repositories.CourseRepository;
 import src.com.nsu.rds.data.repositories.StudentRepository;
-import src.com.nsu.rds.data.repositories.UserRepository;
+import src.com.nsu.rds.data.repositories.AdminRepository;
 import src.com.nsu.rds.utils.Utils;
 
 import java.util.ArrayList;
@@ -57,7 +57,7 @@ public class AdminUI {
 
     private static void allUserList() {
         Utils.printTitle("ALL USERS");
-        ArrayList<User> list = UserRepository.getUsers();
+        ArrayList<User> list = AdminRepository.getUsers();
         for (User s : list) {
             System.out.println("Name: " + String.format("%-15s", s.getFullName()) + " ID: " + String.format("%-7s", s.getUserId()) + " " + String.format("%-7s", (s.isAdmin() ? "ADMIN" : "STUDENT")) + " Added by: " + s.getAddedBy());
         }
@@ -141,7 +141,7 @@ public class AdminUI {
 
             User user = new User(userId, password, true, currentUser.getUserId(), firstName, lastName);
             try {
-                UserRepository.addUser(user);
+                AdminRepository.addUser(user);
                 isSuccess = true;
                 System.out.println("### A new admin added ###\n");
             } catch (Exception e) {
@@ -152,7 +152,7 @@ public class AdminUI {
 
     private static void adminList() {
         Utils.printTitle("ALL ADMINS");
-        ArrayList<User> list = UserRepository.getAdmins();
+        ArrayList<User> list = AdminRepository.getAdmins();
         for (User s : list) {
             System.out.println("Name: " + String.format("%-15s", s.getFullName()) + " ID: " + String.format("%-7s", s.getUserId()));
         }
