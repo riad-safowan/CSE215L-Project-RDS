@@ -58,11 +58,16 @@ public class AdminUI {
     private static void allUserList() {
         Utils.printTitle("ALL USERS");
         ArrayList<User> list = AdminRepository.getUsers();
+        System.out.println("┌──────────┬──────────────────────────────┬────────────┬───────────┐");
+        System.out.println("│ ID       │        Name                  │ Status     │ Added by  │");
+        System.out.println("├──────────┼──────────────────────────────┼────────────┼───────────┤");
         for (User s : list) {
-            System.out.println("Name: " + String.format("%-20s", s.getFullName()) + " ID: " + String.format("%-7s", s.getUserId()) + " " + String.format("%-7s", (s.isAdmin() ? "ADMIN" : "STUDENT")) + " Added by: " + s.getAddedBy());
+            System.out.println("│ " + String.format("%-9s", s.getUserId()) + "│ "+ String.format("%-29s", s.getFullName()) + "│ "
+                    + String.format("%-11s", (s.isAdmin() ? "ADMIN" : "STUDENT")) + "│ " + String.format("%-9s", s.getAddedBy())+" │");
         }
+        System.out.println("└──────────┴──────────────────────────────┴────────────┴───────────┘");
         scanner = new Scanner(System.in);
-        System.out.print("Press enter to go back ");
+        System.out.print("Press 'Enter' to go back ");
         scanner.nextLine();
         System.out.println();
     }
@@ -70,10 +75,15 @@ public class AdminUI {
     private static void removeCourse() {
         Utils.printTitle("ALL COURSES");
         ArrayList<Courses> cList = CourseRepository.getCourses();
+        System.out.println("┌───┬──────────┬───────────────────────────────┬────────────┐");
+        System.out.println("│ No│ Initial  │        Name                   │ Credit     │");
+        System.out.println("├───┼──────────┼───────────────────────────────┼────────────┤");
         for (int i = 0; i < cList.size(); i++) {
-            System.out.println(i + 1 + " - Initial: " + String.format("%-7s", cList.get(i).getInitial()) + " Name: " + String.format("%-30s", cList.get(i).getName()) + " Credit: " + cList.get(i).getCredit());
+            System.out.println("│ " + i + 1 + "│ " + String.format("%-9s", cList.get(i).getInitial()) + "│ "
+                    + String.format("%-30s", cList.get(i).getName()) + "│ " + String.format("%10.2f", (double)cList.get(i).getCredit())+ " │");
         }
-        System.out.print("Enter Course no to remove(0 to back): ");
+        System.out.println("└───┴──────────┴───────────────────────────────┴────────────┘");
+        System.out.print("Enter Course 'No:' to remove(0 to back): ");
         int no = scanner.nextInt();
         if (no == 0) System.out.println();
         else if (no > cList.size()) System.out.println("Invalid Input!!\n");
@@ -110,11 +120,16 @@ public class AdminUI {
     private static void courseList() {
         Utils.printTitle("ALL COURSES");
         ArrayList<Courses> list = CourseRepository.getCourses();
+        System.out.println("┌──────────┬───────────────────────────────┬────────────┐");
+        System.out.println("│ Initial  │        Name                   │ Credit     │");
+        System.out.println("├──────────┼───────────────────────────────┼────────────┤");
         for (Courses c : list) {
-            System.out.println("Initial: " + String.format("%-7s", c.getInitial()) + " Name: " + String.format("%-30s", c.getName()) + " Credit: " + c.getCredit());
+            System.out.println("│ " + String.format("%-9s", c.getInitial()) + "│ " + String.format("%-30s", c.getName())
+                    + "│ "  +String.format("%10.2f", (double)c.getCredit()) + " │");
         }
+        System.out.println("└──────────┴───────────────────────────────┴────────────┘");
         scanner = new Scanner(System.in);
-        System.out.print("\nPress enter to go back ");
+        System.out.print("\nPress 'Enter' to go back ");
         scanner.nextLine();
         System.out.println();
     }
@@ -153,11 +168,15 @@ public class AdminUI {
     private static void adminList() {
         Utils.printTitle("ALL ADMINS");
         ArrayList<User> list = AdminRepository.getAdmins();
+        System.out.println("┌──────────┬───────────────────────────────┐");
+        System.out.println("│ ID       │        Name                   │");
+        System.out.println("├──────────┼───────────────────────────────┤");
         for (User s : list) {
-            System.out.println("Name: " + String.format("%-20s", s.getFullName()) + " ID: " + String.format("%-7s", s.getUserId()));
+            System.out.println("│ " + String.format("%-9s", s.getUserId()) + "│ " + String.format("%-29s", s.getFullName())+" │" );
         }
+        System.out.println("└──────────┴───────────────────────────────┘");
         scanner = new Scanner(System.in);
-        System.out.print("Press enter to go back ");
+        System.out.print("Press 'Enter' to go back ");
         scanner.nextLine();
     }
 
@@ -167,9 +186,14 @@ public class AdminUI {
     private static void removeStudent() {
         Utils.printTitle("REMOVE A STUDENT");
         ArrayList<Student> list = StudentRepository.getStudents();
+        System.out.println("┌──────────┬──────────────────────────────┬────────────────┐");
+        System.out.println("│ ID       │        Name                  │ Due amount     │");
+        System.out.println("├──────────┼──────────────────────────────┼────────────────┤");
         for (Student student : list) {
-            System.out.println("Name: " + String.format("%-20s", student.getFullName()) + " ID: " + String.format("%-7s", student.getUserId()) + " Due Amount: BDT" + student.getUnpaidAmount());
+            System.out.println("│ " + String.format("%-9s", student.getUserId()) + "│ "
+                    + String.format("%-29s", student.getFullName()) +  "│ BDT" + String.format("%-11.1f",student.getUnpaidAmount()) +" │");
         }
+        System.out.println("└──────────┴──────────────────────────────┴────────────────┘");
         System.out.print("Enter Student ID to remove(0 to back): ");
         scanner = new Scanner(System.in);
         String id = scanner.next();
@@ -222,11 +246,17 @@ public class AdminUI {
     private static void studentList() {
         Utils.printTitle("ALL STUDENTS");
         ArrayList<Student> list = StudentRepository.getStudents();
+        System.out.println("┌──────────┬──────────────────────────────┬────────────────┐");
+        System.out.println("│ ID       │        Name                  │ Due amount     │");
+        System.out.println("├──────────┼──────────────────────────────┼────────────────┤");
         for (Student s : list) {
-            System.out.println("Name: " + String.format("%-20s", s.getFullName()) + " ID: " + String.format("%-7s", s.getUserId()) + " Due Amount: BDT" + s.getUnpaidAmount());
+            System.out.println("│ " + String.format("%-9s", s.getUserId()) +
+                    "│ " + String.format("%-29s", s.getFullName()) +
+                    "│ BDT" + String.format("%-11.1f", s.getUnpaidAmount()) + " │");
         }
+        System.out.println("└──────────┴──────────────────────────────┴────────────────┘");
         scanner = new Scanner(System.in);
-        System.out.print("Press enter to go back ");
+        System.out.print("Press 'Enter' to go back ");
         scanner.nextLine();
         System.out.println();
     }
