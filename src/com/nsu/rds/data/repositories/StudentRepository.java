@@ -101,7 +101,7 @@ public class StudentRepository {
             File myObj = new File(Const.getCourseFileName(userId));
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNext()) {
-                newList.add(new Courses(myReader.next(), myReader.next(), myReader.nextInt()));
+                newList.add(new Courses(myReader.next(), myReader.next(), myReader.nextDouble()));
             }
             myReader.close();
         } catch (FileNotFoundException e) {

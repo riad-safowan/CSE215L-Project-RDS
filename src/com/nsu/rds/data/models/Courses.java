@@ -3,9 +3,9 @@ package src.com.nsu.rds.data.models;
 public class Courses {
     private String initial;
     private String name;
-    private int credit;
+    private double credit;
 
-    public Courses(String initial, String name, int credit) {
+    public Courses(String initial, String name, double credit) {
         this.initial = initial;
         this.name = name;
         this.credit = credit;
@@ -27,11 +27,11 @@ public class Courses {
         this.name = name;
     }
 
-    public int getCredit() {
+    public double getCredit() {
         return credit;
     }
 
-    public void setCredit(int credit) {
+    public void setCredit(double credit) {
         this.credit = credit;
     }
 }

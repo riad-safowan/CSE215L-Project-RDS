@@ -75,15 +75,15 @@ public class AdminUI {
     private static void removeCourse() {
         Utils.printTitle("ALL COURSES");
         ArrayList<Courses> cList = CourseRepository.getCourses();
-        System.out.println("┌───┬──────────┬───────────────────────────────┬────────────┐");
-        System.out.println("│ No│ Initial  │        Name                   │ Credit     │");
-        System.out.println("├───┼──────────┼───────────────────────────────┼────────────┤");
+        System.out.println("┌─────┬──────────┬───────────────────────────────┬────────────┐");
+        System.out.println("│  No │ Initial  │        Name                   │   Credit   │");
+        System.out.println("├─────┼──────────┼───────────────────────────────┼────────────┤");
         for (int i = 0; i < cList.size(); i++) {
-            System.out.println("│ " + i + 1 + "│ " + String.format("%-9s", cList.get(i).getInitial()) + "│ "
-                    + String.format("%-30s", cList.get(i).getName()) + "│ " + String.format("%10.2f", (double)cList.get(i).getCredit())+ " │");
+            System.out.println("│ " + String.format("%3d",(i + 1))+ " │ " + String.format("%-9s", cList.get(i).getInitial()) + "│ "
+                    + String.format("%-30s", cList.get(i).getName()) + "│ " + String.format("%7.2f", cList.get(i).getCredit())+ "    │");
         }
-        System.out.println("└───┴──────────┴───────────────────────────────┴────────────┘");
-        System.out.print("Enter Course 'No:' to remove(0 to back): ");
+        System.out.println("└─────┴──────────┴───────────────────────────────┴────────────┘");
+        System.out.print("Enter Course No to remove (0 to back): ");
         int no = scanner.nextInt();
         if (no == 0) System.out.println();
         else if (no > cList.size()) System.out.println("Invalid Input!!\n");
@@ -121,11 +121,11 @@ public class AdminUI {
         Utils.printTitle("ALL COURSES");
         ArrayList<Courses> list = CourseRepository.getCourses();
         System.out.println("┌──────────┬───────────────────────────────┬────────────┐");
-        System.out.println("│ Initial  │        Name                   │ Credit     │");
+        System.out.println("│ Initial  │         Course Name           │   Credit   │");
         System.out.println("├──────────┼───────────────────────────────┼────────────┤");
         for (Courses c : list) {
             System.out.println("│ " + String.format("%-9s", c.getInitial()) + "│ " + String.format("%-30s", c.getName())
-                    + "│ "  +String.format("%10.2f", (double)c.getCredit()) + " │");
+                    + "│ "  +String.format("%7.2f", c.getCredit()) + "    │");
         }
         System.out.println("└──────────┴───────────────────────────────┴────────────┘");
         scanner = new Scanner(System.in);
@@ -187,7 +187,7 @@ public class AdminUI {
         Utils.printTitle("REMOVE A STUDENT");
         ArrayList<Student> list = StudentRepository.getStudents();
         System.out.println("┌──────────┬──────────────────────────────┬────────────────┐");
-        System.out.println("│ ID       │        Name                  │ Due amount     │");
+        System.out.println("│   ID     │       Student Name           │   Due amount   │");
         System.out.println("├──────────┼──────────────────────────────┼────────────────┤");
         for (Student student : list) {
             System.out.println("│ " + String.format("%-9s", student.getUserId()) + "│ "
@@ -247,7 +247,7 @@ public class AdminUI {
         Utils.printTitle("ALL STUDENTS");
         ArrayList<Student> list = StudentRepository.getStudents();
         System.out.println("┌──────────┬──────────────────────────────┬────────────────┐");
-        System.out.println("│ ID       │        Name                  │ Due amount     │");
+        System.out.println("│    ID    │         Course Name          │   Due amount   │");
         System.out.println("├──────────┼──────────────────────────────┼────────────────┤");
         for (Student s : list) {
             System.out.println("│ " + String.format("%-9s", s.getUserId()) +
