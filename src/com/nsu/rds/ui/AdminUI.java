@@ -81,7 +81,7 @@ public class AdminUI {
         Utils.printTitle("ALL COURSES");
         ArrayList<Courses> cList = CourseRepository.getCourses();
         System.out.println("┌─────┬──────────┬───────────────────────────────┬────────────┐");
-        System.out.println("│  No │ Initial  │        Name                   │   Credit   │");
+        System.out.println("│  No │ Initial  │       Course Name             │   Credit   │");
         System.out.println("├─────┼──────────┼───────────────────────────────┼────────────┤");
         for (int i = 0; i < cList.size(); i++) {
             System.out.println("│ " + String.format("%3d", (i + 1)) + " │ " + String.format("%-9s", cList.get(i).getInitial()) + "│ "
@@ -174,7 +174,7 @@ public class AdminUI {
         Utils.printTitle("ALL ADMINS");
         ArrayList<User> list = AdminRepository.getAdmins();
         System.out.println("┌──────────┬───────────────────────────────┐");
-        System.out.println("│ ID       │        Name                   │");
+        System.out.println("│ ID       │      Admin  Name              │");
         System.out.println("├──────────┼───────────────────────────────┤");
         for (User s : list) {
             System.out.println("│ " + String.format("%-9s", s.getUserId()) + "│ " + String.format("%-29s", s.getFullName()) + " │");
@@ -252,7 +252,7 @@ public class AdminUI {
         Utils.printTitle("ALL STUDENTS");
         ArrayList<Student> list = StudentRepository.getStudents();
         System.out.println("┌──────────┬──────────────────────────────┬────────────────┐");
-        System.out.println("│    ID    │         Course Name          │   Due amount   │");
+        System.out.println("│    ID    │        Student Name          │   Due amount   │");
         System.out.println("├──────────┼──────────────────────────────┼────────────────┤");
         for (Student s : list) {
             System.out.println("│ " + String.format("%-9s", s.getUserId()) +
