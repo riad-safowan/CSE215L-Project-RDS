@@ -191,7 +191,7 @@ public class AdminUI {
         System.out.println("├──────────┼──────────────────────────────┼────────────────┤");
         for (Student student : list) {
             System.out.println("│ " + String.format("%-9s", student.getUserId()) + "│ "
-                    + String.format("%-29s", student.getFullName()) +  "│ BDT" + String.format("%-11.1f",student.getUnpaidAmount()) +" │");
+                    + String.format("%-29s", student.getFullName()) +  "│ " + String.format("%8.2f/- BDT",student.getUnpaidAmount()) +" │");
         }
         System.out.println("└──────────┴──────────────────────────────┴────────────────┘");
         System.out.print("Enter Student ID to remove(0 to back): ");
@@ -252,7 +252,7 @@ public class AdminUI {
         for (Student s : list) {
             System.out.println("│ " + String.format("%-9s", s.getUserId()) +
                     "│ " + String.format("%-29s", s.getFullName()) +
-                    "│ BDT" + String.format("%-11.1f", s.getUnpaidAmount()) + " │");
+                    "│ " + String.format("%8.2f/- BDT", s.getUnpaidAmount()) + " │");
         }
         System.out.println("└──────────┴──────────────────────────────┴────────────────┘");
         scanner = new Scanner(System.in);
