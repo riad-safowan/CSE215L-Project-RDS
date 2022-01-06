@@ -32,14 +32,19 @@ public class AdvisingUI {
             System.out.println("0 -> Back");
 
             System.out.print("Select an option: ");
-            switch (scanner.nextInt()) {
-                case 1 -> offeredCourseList();
-                case 2 -> addCourse();
-                case 3 -> myCourseList();
-                case 4 -> removeCourse();
-                case 5 -> printAdvisingSlip();
-                case 0 -> isDone = true;
-                default -> System.out.println("Wrong Input! Select Again: ");
+            try {
+                scanner = new Scanner(System.in);
+                switch (scanner.nextInt()) {
+                    case 1 -> offeredCourseList();
+                    case 2 -> addCourse();
+                    case 3 -> myCourseList();
+                    case 4 -> removeCourse();
+                    case 5 -> printAdvisingSlip();
+                    case 0 -> isDone = true;
+                    default -> System.out.println("Wrong Input! Select Again: \n");
+                }
+            } catch (Exception e) {
+                System.out.println("Wrong Input! Select Again: \n");
             }
         } while (!isDone);
         StudentUI.homeScreen(user);

@@ -23,13 +23,18 @@ public class StudentUI {
             System.out.println("3 -> Change Password");
             System.out.println("0 -> Logout");
 
-            System.out.print("Select an option: ");
-            switch (scanner.nextInt()) {
-                case 1 -> studentInfo();
-                case 2 -> advisingWindow();
-                case 3 -> changePassword();
-                case 0 -> isDone = true;
-                default -> System.out.println("Wrong Input! Select Again: ");
+            try {
+                System.out.print("Select an option: ");
+                scanner = new Scanner(System.in);
+                switch (scanner.nextInt()) {
+                    case 1 -> studentInfo();
+                    case 2 -> advisingWindow();
+                    case 3 -> changePassword();
+                    case 0 -> isDone = true;
+                    default -> System.out.println("Wrong Input! Select Again: \n");
+                }
+            } catch (Exception e) {
+                System.out.println("Wrong Input! Select Again: \n");
             }
         } while (!isDone);
         System.out.println("You are logged out!! ");
