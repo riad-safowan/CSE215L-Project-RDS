@@ -33,6 +33,7 @@ public class AdvisingUI {
 
             System.out.print("Select an option: ");
             try {
+                scanner = new Scanner(System.in);
                 switch (scanner.nextInt()) {
                     case 1 -> offeredCourseList();
                     case 2 -> addCourse();

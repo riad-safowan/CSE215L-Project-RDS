@@ -25,6 +25,7 @@ public class StudentUI {
 
             try {
                 System.out.print("Select an option: ");
+                scanner = new Scanner(System.in);
                 switch (scanner.nextInt()) {
                     case 1 -> studentInfo();
                     case 2 -> advisingWindow();
