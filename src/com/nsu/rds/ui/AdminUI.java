@@ -34,22 +34,27 @@ public class AdminUI {
             System.out.println(" 9 -> Remove a Course");
             System.out.println("10 -> All user list");
             System.out.println(" 0 -> Logout");
-
-            System.out.print("Select an option: ");
-            switch (scanner.nextInt()) {
-                case 1 -> studentList();
-                case 2 -> addStudent();
-                case 3 -> removeStudent();
-                case 4 -> editStudent();
-                case 5 -> adminList();
-                case 6 -> addAdmin();
-                case 7 -> courseList();
-                case 8 -> addCourse();
-                case 9 -> removeCourse();
-                case 10 -> allUserList();
-                case 0 -> isDone = true;
-                default -> System.out.println("Wrong Input! Select Again: ");
+            try {
+                System.out.print("Select an option: ");
+                scanner = new Scanner(System.in);
+                switch (scanner.nextInt()) {
+                    case 1 -> studentList();
+                    case 2 -> addStudent();
+                    case 3 -> removeStudent();
+                    case 4 -> editStudent();
+                    case 5 -> adminList();
+                    case 6 -> addAdmin();
+                    case 7 -> courseList();
+                    case 8 -> addCourse();
+                    case 9 -> removeCourse();
+                    case 10 -> allUserList();
+                    case 0 -> isDone = true;
+                    default -> System.out.println("Wrong Input! Select Again: \n");
+                }
+            } catch (Exception e) {
+                System.out.println("Wrong Input! Select Again: \n");
             }
+
         } while (!isDone);
         System.out.println("You are logged out!! ");
         LoginUI.showLoginScreen();
@@ -62,8 +67,8 @@ public class AdminUI {
         System.out.println("│ ID       │        Name                  │ Status     │ Added by  │");
         System.out.println("├──────────┼──────────────────────────────┼────────────┼───────────┤");
         for (User s : list) {
-            System.out.println("│ " + String.format("%-9s", s.getUserId()) + "│ "+ String.format("%-29s", s.getFullName()) + "│ "
-                    + String.format("%-11s", (s.isAdmin() ? "ADMIN" : "STUDENT")) + "│ " + String.format("%-9s", s.getAddedBy())+" │");
+            System.out.println("│ " + String.format("%-9s", s.getUserId()) + "│ " + String.format("%-29s", s.getFullName()) + "│ "
+                    + String.format("%-11s", (s.isAdmin() ? "ADMIN" : "STUDENT")) + "│ " + String.format("%-9s", s.getAddedBy()) + " │");
         }
         System.out.println("└──────────┴──────────────────────────────┴────────────┴───────────┘");
         scanner = new Scanner(System.in);
@@ -76,11 +81,11 @@ public class AdminUI {
         Utils.printTitle("ALL COURSES");
         ArrayList<Courses> cList = CourseRepository.getCourses();
         System.out.println("┌─────┬──────────┬───────────────────────────────┬────────────┐");
-        System.out.println("│  No │ Initial  │        Name                   │   Credit   │");
+        System.out.println("│  No │ Initial  │       Course Name             │   Credit   │");
         System.out.println("├─────┼──────────┼───────────────────────────────┼────────────┤");
         for (int i = 0; i < cList.size(); i++) {
-            System.out.println("│ " + String.format("%3d",(i + 1))+ " │ " + String.format("%-9s", cList.get(i).getInitial()) + "│ "
-                    + String.format("%-30s", cList.get(i).getName()) + "│ " + String.format("%7.2f", cList.get(i).getCredit())+ "    │");
+            System.out.println("│ " + String.format("%3d", (i + 1)) + " │ " + String.format("%-9s", cList.get(i).getInitial()) + "│ "
+                    + String.format("%-30s", cList.get(i).getName()) + "│ " + String.format("%7.2f", cList.get(i).getCredit()) + "    │");
         }
         System.out.println("└─────┴──────────┴───────────────────────────────┴────────────┘");
         System.out.print("Enter Course No to remove (0 to back): ");
@@ -125,7 +130,7 @@ public class AdminUI {
         System.out.println("├──────────┼───────────────────────────────┼────────────┤");
         for (Courses c : list) {
             System.out.println("│ " + String.format("%-9s", c.getInitial()) + "│ " + String.format("%-30s", c.getName())
-                    + "│ "  +String.format("%7.2f", c.getCredit()) + "    │");
+                    + "│ " + String.format("%7.2f", c.getCredit()) + "    │");
         }
         System.out.println("└──────────┴───────────────────────────────┴────────────┘");
         scanner = new Scanner(System.in);
@@ -169,10 +174,10 @@ public class AdminUI {
         Utils.printTitle("ALL ADMINS");
         ArrayList<User> list = AdminRepository.getAdmins();
         System.out.println("┌──────────┬───────────────────────────────┐");
-        System.out.println("│ ID       │        Name                   │");
+        System.out.println("│ ID       │      Admin  Name              │");
         System.out.println("├──────────┼───────────────────────────────┤");
         for (User s : list) {
-            System.out.println("│ " + String.format("%-9s", s.getUserId()) + "│ " + String.format("%-29s", s.getFullName())+" │" );
+            System.out.println("│ " + String.format("%-9s", s.getUserId()) + "│ " + String.format("%-29s", s.getFullName()) + " │");
         }
         System.out.println("└──────────┴───────────────────────────────┘");
         scanner = new Scanner(System.in);
@@ -191,7 +196,7 @@ public class AdminUI {
         System.out.println("├──────────┼──────────────────────────────┼────────────────┤");
         for (Student student : list) {
             System.out.println("│ " + String.format("%-9s", student.getUserId()) + "│ "
-                    + String.format("%-29s", student.getFullName()) +  "│ BDT" + String.format("%-11.1f",student.getUnpaidAmount()) +" │");
+                    + String.format("%-29s", student.getFullName()) + "│ BDT" + String.format("%-11.1f", student.getUnpaidAmount()) + " │");
         }
         System.out.println("└──────────┴──────────────────────────────┴────────────────┘");
         System.out.print("Enter Student ID to remove(0 to back): ");
@@ -247,7 +252,7 @@ public class AdminUI {
         Utils.printTitle("ALL STUDENTS");
         ArrayList<Student> list = StudentRepository.getStudents();
         System.out.println("┌──────────┬──────────────────────────────┬────────────────┐");
-        System.out.println("│    ID    │         Course Name          │   Due amount   │");
+        System.out.println("│    ID    │        Student Name          │   Due amount   │");
         System.out.println("├──────────┼──────────────────────────────┼────────────────┤");
         for (Student s : list) {
             System.out.println("│ " + String.format("%-9s", s.getUserId()) +
