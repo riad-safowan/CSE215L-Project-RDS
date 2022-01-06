@@ -59,7 +59,7 @@ public class AdminUI {
         Utils.printTitle("ALL USERS");
         ArrayList<User> list = AdminRepository.getUsers();
         for (User s : list) {
-            System.out.println("Name: " + String.format("%-15s", s.getFullName()) + " ID: " + String.format("%-7s", s.getUserId()) + " " + String.format("%-7s", (s.isAdmin() ? "ADMIN" : "STUDENT")) + " Added by: " + s.getAddedBy());
+            System.out.println("Name: " + String.format("%-20s", s.getFullName()) + " ID: " + String.format("%-7s", s.getUserId()) + " " + String.format("%-7s", (s.isAdmin() ? "ADMIN" : "STUDENT")) + " Added by: " + s.getAddedBy());
         }
         scanner = new Scanner(System.in);
         System.out.print("Press enter to go back ");
@@ -154,7 +154,7 @@ public class AdminUI {
         Utils.printTitle("ALL ADMINS");
         ArrayList<User> list = AdminRepository.getAdmins();
         for (User s : list) {
-            System.out.println("Name: " + String.format("%-15s", s.getFullName()) + " ID: " + String.format("%-7s", s.getUserId()));
+            System.out.println("Name: " + String.format("%-20s", s.getFullName()) + " ID: " + String.format("%-7s", s.getUserId()));
         }
         scanner = new Scanner(System.in);
         System.out.print("Press enter to go back ");
@@ -168,7 +168,7 @@ public class AdminUI {
         Utils.printTitle("REMOVE A STUDENT");
         ArrayList<Student> list = StudentRepository.getStudents();
         for (Student student : list) {
-            System.out.println("Name: " + String.format("%-15s", student.getFullName()) + " ID: " + String.format("%-7s", student.getUserId()) + " Due Amount: BDT" + student.getUnpaidAmount());
+            System.out.println("Name: " + String.format("%-20s", student.getFullName()) + " ID: " + String.format("%-7s", student.getUserId()) + " Due Amount: BDT" + student.getUnpaidAmount());
         }
         System.out.print("Enter Student ID to remove(0 to back): ");
         scanner = new Scanner(System.in);
@@ -223,7 +223,7 @@ public class AdminUI {
         Utils.printTitle("ALL STUDENTS");
         ArrayList<Student> list = StudentRepository.getStudents();
         for (Student s : list) {
-            System.out.println("Name: " + String.format("%-15s", s.getFullName()) + " ID: " + String.format("%-7s", s.getUserId()) + " Due Amount: BDT" + s.getUnpaidAmount());
+            System.out.println("Name: " + String.format("%-20s", s.getFullName()) + " ID: " + String.format("%-7s", s.getUserId()) + " Due Amount: BDT" + s.getUnpaidAmount());
         }
         scanner = new Scanner(System.in);
         System.out.print("Press enter to go back ");
