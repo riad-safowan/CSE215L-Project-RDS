@@ -195,7 +195,7 @@ public class AdminUI {
         System.out.println("│   ID     │       Student Name           │   Due amount   │");
         System.out.println("├──────────┼──────────────────────────────┼────────────────┤");
         for (Student student : list) {
-            System.out.println("│ " + String.format("%-9s", student.getUserId()) + "│ " + String.format("%-29s", student.getFullName()) +  "│ " + String.format("%8.2f/- BDT",student.getUnpaidAmount()) +" │" + String.format("%-29s", student.getFullName()) + "│ BDT" + String.format("%-11.1f", student.getUnpaidAmount()) + " │");
+            System.out.println("│ " + String.format("%-9s", student.getUserId()) + "│ " + String.format("%-29s", student.getFullName()) +  "│ " + String.format("%8.2f/- BDT",student.getUnpaidAmount()) +" │");
         }
         System.out.println("└──────────┴──────────────────────────────┴────────────────┘");
         System.out.print("Enter Student ID to remove(0 to back): ");
