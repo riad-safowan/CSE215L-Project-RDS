@@ -61,34 +61,34 @@ public class AdvisingUI {
         System.out.println("Student Name: " + String.format("%-30s", currentUser.getFullName()) + "ID# " + String.format("%-9s", currentUser.getUserId()) + "      Degree: Undergraduate");
         System.out.println();
         System.out.println("\t┌──────┬──────────┬──────────────┬──────────────────────┐");
-        System.out.println("\t│ SL   │ Course   │    Credit    │     Tuition          │");
+        System.out.println("\t│  SL  │  Course  │    Credit    │       Tuition        │");
         System.out.println("\t├──────┼──────────┼──────────────┼──────────────────────┤");
 
         ArrayList<Courses> courses = StudentRepository.getCourses(currentUser.getUserId());
         double tuition = 0;
         for (int i = 0; i < courses.size(); i++) {
-            System.out.println("\t│ " + String.format("%5d", i + 1) + "│ " + String.format("%-9s", courses.get(i).getInitial()) + "│ " + String.format("%13.2f", courses.get(i).getCredit()) + "│ " + String.format("%14.2f/- BDT", courses.get(i).getCredit() * 6500.0)+ " │");
+            System.out.println("\t│ " + String.format("%3d", i + 1) + "  │  " + String.format("%-7s", courses.get(i).getInitial()) + " │ " + String.format("%8.2f", courses.get(i).getCredit()) + "     │ " + String.format("%12.2f/- BDT", courses.get(i).getCredit() * fee.getCreditFee())+ "   │");
             tuition = tuition + (courses.get(i).getCredit() * fee.getCreditFee());
         }
-        System.out.println("\t├──────┼──────────┼──────────────┤                      │");
+        System.out.println("\t├──────┴──────────┴──────────────┴──────────────────────┤");
         System.out.println("\t│\t\t\t       Tuition Total :" + String.format("%15.2f/- BDT", tuition)+" │");
-        System.out.println("\t└──────┴──────────┴──────────────┴──────────────────────┘");
+        System.out.println("\t└───────────────────────────────────────────────────────┘");
         System.out.println();
-        System.out.println("\t\t\t\tStudent Activity Fee         " + String.format("%7.2f/- BDT", fee.getActivityFee()));
-        System.out.println("\t\t\t\tComputer Lab Fee             " + String.format("%7.2f/- BDT", fee.getComputerLabFee()));
-        System.out.println("\t\t\t\tLibrary Fee                  " + String.format("%7.2f/- BDT", fee.getLibraryFee()));
-        System.out.println("\t\t\t\tScience Lab Fee              " + String.format("%7.2f/- BDT", fee.getScienceLabFee()));
+        System.out.println("\t\t\t\tStudent Activity Fee        " + String.format("%7.2f/- BDT", fee.getActivityFee()));
+        System.out.println("\t\t\t\tComputer Lab Fee            " + String.format("%7.2f/- BDT", fee.getComputerLabFee()));
+        System.out.println("\t\t\t\tLibrary Fee                 " + String.format("%7.2f/- BDT", fee.getLibraryFee()));
+        System.out.println("\t\t\t\tScience Lab Fee             " + String.format("%7.2f/- BDT", fee.getScienceLabFee()));
         double nonTuitionFee = fee.getActivityFee() + fee.getComputerLabFee() + fee.getLibraryFee() + fee.getScienceLabFee();
-        System.out.println("\t\t\t\t-------------------------------------------");
-        System.out.println("\t\t\t\tTotal:                     " + String.format("%9.2f/- BDT", tuition + nonTuitionFee));
+        System.out.println("\t\t\t\t------------------------------------------");
+        System.out.println("\t\t\t\tTotal:                    " + String.format("%9.2f/- BDT", tuition + nonTuitionFee));
         System.out.println();
-        System.out.println("\t\t\t\tLess: Non Tuition fees       " + String.format("%7.2f/- BDT", nonTuitionFee));
+        System.out.println("\t\t\t\tLess: Non Tuition fees      " + String.format("%7.2f/- BDT", nonTuitionFee));
         double discount = tuition * fee.getWaiver() / 100;
-        System.out.println("\t\t\t\tLess: Waiver " + fee.getWaiver() + "%          " + String.format("%7.2f/- BDT", discount));
-        System.out.println("\t\t\t\t-------------------------------------------");
+        System.out.println("\t\t\t\tLess: Waiver " + fee.getWaiver() + "%         " + String.format("%7.2f/- BDT", discount));
+        System.out.println("\t\t\t\t------------------------------------------");
         System.out.println("\t\t\t\tPayable:                   " + String.format("%9.2f/- BDT", (tuition - discount)));
         System.out.println();
-        System.out.println("-------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------");
         System.out.println();
     }
 
