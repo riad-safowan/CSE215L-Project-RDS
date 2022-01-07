@@ -84,8 +84,8 @@ public class AdminUI {
         System.out.println("│  No │ Initial  │       Course Name             │   Credit   │");
         System.out.println("├─────┼──────────┼───────────────────────────────┼────────────┤");
         for (int i = 0; i < cList.size(); i++) {
-            System.out.println("│ " + String.format("%-9s", student.getUserId()) + "│ " 
-                               + String.format("%-29s", student.getFullName()) +  "│ " + String.format("%8.2f/- BDT",student.getUnpaidAmount()) + " │");
+            System.out.println("│ " + String.format("%3d", (i + 1)) + " │ " + String.format("%-9s", cList.get(i).getInitial()) + "│ "
+                    + String.format("%-30s", cList.get(i).getName()) + "│ " + String.format("%7.2f", cList.get(i).getCredit()) + "    │");
         }
         System.out.println("└─────┴──────────┴───────────────────────────────┴────────────┘");
         System.out.print("Enter Course No to remove (0 to back): ");
