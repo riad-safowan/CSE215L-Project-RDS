@@ -61,7 +61,7 @@ public class AdvisingUI {
         System.out.println("Student Name: " + String.format("%-30s", currentUser.getFullName()) + "ID# " + String.format("%-9s", currentUser.getUserId()) + "      Degree: Undergraduate");
         System.out.println();
         System.out.println("\t┌──────┬──────────┬──────────────┬──────────────────────┐");
-        System.out.println("\t│  SL  │  Course  │    Credit    │       Tuition        │");
+        System.out.println("\t│  SL  │  Course  │    Credit    │        Tuition       │");
         System.out.println("\t├──────┼──────────┼──────────────┼──────────────────────┤");
 
         ArrayList<Courses> courses = StudentRepository.getCourses(currentUser.getUserId());
@@ -71,7 +71,7 @@ public class AdvisingUI {
             tuition = tuition + (courses.get(i).getCredit() * fee.getCreditFee());
         }
         System.out.println("\t├──────┴──────────┴──────────────┴──────────────────────┤");
-        System.out.println("\t│\t\t\t       Tuition Total :" + String.format("%15.2f/- BDT", tuition)+" │");
+        System.out.println("\t│\t\t\t       Tuition Total :" + String.format("%13.2f/- BDT", tuition)+"   │");
         System.out.println("\t└───────────────────────────────────────────────────────┘");
         System.out.println();
         System.out.println("\t\t\t\tStudent Activity Fee        " + String.format("%7.2f/- BDT", fee.getActivityFee()));
@@ -86,7 +86,7 @@ public class AdvisingUI {
         double discount = tuition * fee.getWaiver() / 100;
         System.out.println("\t\t\t\tLess: Waiver " + fee.getWaiver() + "%         " + String.format("%7.2f/- BDT", discount));
         System.out.println("\t\t\t\t------------------------------------------");
-        System.out.println("\t\t\t\tPayable:                 " + String.format("%9.2f/- BDT", (tuition - discount)));
+        System.out.println("\t\t\t\tPayable:                  " + String.format("%9.2f/- BDT", (tuition - discount)));
         System.out.println();
         System.out.println("------------------------------------------------------------");
         System.out.println();
