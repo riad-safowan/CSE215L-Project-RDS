@@ -20,6 +20,7 @@ public class AdminUI {
     static void homeScreen(User user) {
         currentUser = user;
         Utils.printTitle("ADMIN PANEL");
+        Utils.printTitle(currentUser.getFullName());
         boolean isDone = false;
 
         do {

@@ -54,11 +54,11 @@ public class AdvisingUI {
         Fee fee = AdminRepository.getFees();
         Utils.printTitle("ADVISING SLIP");
         System.out.println();
-        System.out.println("\t\t\tNorth South University");
-        System.out.println("\t\tStudent Registration - Fall 2021");
+        System.out.println("\t\t\t      North South University");
+        System.out.println("\t\t     Student Registration - Fall 2021");
         System.out.println("\t\tDate : " + new SimpleDateFormat("EEEE, dd MMMM yyyy, hh:mm:ss a").format(Calendar.getInstance().getTime()));
         System.out.println();
-        System.out.println("Student Name: " + String.format("%-30s", currentUser.getFullName()) + "ID# " + String.format("%-9s", currentUser.getUserId()) + "      Degree: Undergraduate");
+        System.out.println("Student Name: " + String.format("%-30s", currentUser.getFullName()) + "ID# " + String.format("%-9s", currentUser.getUserId()) + "   Degree: Undergraduate");
         System.out.println();
         System.out.println("\t┌──────┬──────────┬──────────────┬──────────────────────┐");
         System.out.println("\t│  SL  │  Course  │    Credit    │        Tuition       │");
