@@ -108,9 +108,9 @@ public class AdminUI {
             System.out.print("Enter Course initial (0 to back): ");
             String initial = scanner.next();
             if (Objects.equals(initial, "0")) break;
-            System.out.print("Enter Course Name: ");
+            System.out.print("Enter Course Name               : ");
             String name = scanner.next();
-            System.out.print("Enter Course credit: ");
+            System.out.print("Enter Course credit             : ");
             int credit = scanner.nextInt();
             Courses courses = new Courses(initial, name, credit);
             try {
@@ -147,13 +147,13 @@ public class AdminUI {
             System.out.print("Enter ADMIN ID (0 to back): ");
             String userId = scanner.next();
             if (Objects.equals(userId, "0")) break;
-            System.out.print("Enter First Name: ");
+            System.out.print("Enter First Name          : ");
             String firstName = scanner.next();
-            System.out.print("Enter Last Name: ");
+            System.out.print("Enter Last Name           : ");
             String lastName = scanner.next();
-            System.out.print("Set a password: ");
+            System.out.print("Set a password            : ");
             String password = scanner.next();
-            System.out.print("Re-enter the password: ");
+            System.out.print("Re-enter the password     : ");
             String rePassword = scanner.next();
             if (!Objects.equals(password, rePassword)) {
                 System.out.println("Password did not match!!\n");
@@ -223,13 +223,13 @@ public class AdminUI {
                 System.out.println();
                 break;
             }
-            System.out.print("Enter First Name: ");
+            System.out.print("Enter First Name      : ");
             String firstName = scanner.next();
-            System.out.print("Enter Last Name: ");
+            System.out.print("Enter Last Name       : ");
             String lastName = scanner.next();
-            System.out.print("Set a password: ");
+            System.out.print("Set a password        : ");
             String password = scanner.next();
-            System.out.print("Re-enter the password: ");
+            System.out.print("Re-enter the password : ");
             String rePassword = scanner.next();
             if (!Objects.equals(password, rePassword)) {
                 System.out.println("Password did not match!!\n");
