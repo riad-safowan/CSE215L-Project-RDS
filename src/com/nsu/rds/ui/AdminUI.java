@@ -150,9 +150,11 @@ public class AdminUI {
             String userId = scanner.next();
             if (Objects.equals(userId, "0")) break;
             System.out.print("Enter First Name          : ");
-            String firstName = scanner.next();
+            scanner = new Scanner(System.in);
+            String firstName = scanner.nextLine();
             System.out.print("Enter Last Name           : ");
-            String lastName = scanner.next();
+            scanner = new Scanner(System.in);
+            String lastName = scanner.nextLine();
             System.out.print("Set a password            : ");
             String password = scanner.next();
             System.out.print("Re-enter the password     : ");
