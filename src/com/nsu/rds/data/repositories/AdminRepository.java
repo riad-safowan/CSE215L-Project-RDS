@@ -94,10 +94,8 @@ public class AdminRepository {
     }
 
     public static void setFees(Fee fee) {
-        try {
-            FileWriter myWriter = new FileWriter(Const.ALL_FEES_LIST);
-            myWriter.write(fee.getCreditFee() + " " + fee.getActivityFee() + " " + fee.getComputerLabFee() + " " + fee.getLibraryFee() + " " + fee.getScienceLabFee() + " " + fee.getWaiver());
-            myWriter.close();
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Const.ALL_FEES_LIST))) {
+            outputStream.writeObject(fee);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -105,12 +103,9 @@ public class AdminRepository {
 
     public static Fee getFees() {
         Fee fee = new Fee();
-        try {
-            File myObj = new File(Const.ALL_FEES_LIST);
-            Scanner myReader = new Scanner(myObj);
-            fee = new Fee(myReader.nextDouble(), myReader.nextDouble(), myReader.nextDouble(), myReader.nextDouble(), myReader.nextDouble(), myReader.nextDouble());
-            myReader.close();
-        } catch (FileNotFoundException e) {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(Const.ALL_FEES_LIST))) {
+            fee = (Fee) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return fee;
