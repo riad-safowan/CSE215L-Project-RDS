@@ -2,12 +2,10 @@ package src.com.nsu.rds.data.repositories;
 
 import src.com.nsu.rds.data.models.Courses;
 import src.com.nsu.rds.data.models.Student;
+import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.utils.Const;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -34,26 +32,23 @@ public class CourseRepository {
 
     public static ArrayList<Courses> getCourses() {
         ArrayList<Courses> newList = new ArrayList<>();
-        try {
-            File myObj = new File(Const.ALL_COURSE_LIST);
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNext()) {
-                newList.add(new Courses(myReader.next(), myReader.next(), myReader.nextDouble()));
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(Const.ALL_COURSE_LIST))) {
+            while (true) {
+                newList.add((Courses) inputStream.readObject());
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
+        } catch (EOFException e) {
+            return newList;
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return newList;
     }
 
     public static void setCourses(ArrayList<Courses> courses) {
-        try {
-            FileWriter myWriter = new FileWriter(Const.ALL_COURSE_LIST);
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Const.ALL_COURSE_LIST))) {
             for (Courses c : courses) {
-                myWriter.write(c.getInitial() + " " + c.getName() + " " + c.getCredit() + "\n");
+                outputStream.writeObject(c);
             }
-            myWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

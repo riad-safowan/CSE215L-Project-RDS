@@ -1,6 +1,8 @@
 package src.com.nsu.rds.data.models;
 
-public class Fee {
+import java.io.Serializable;
+
+public class Fee implements Serializable {
     private double creditFee;
     private double activityFee;
     private double computerLabFee;

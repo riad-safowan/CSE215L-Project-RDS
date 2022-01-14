@@ -1,6 +1,8 @@
 package src.com.nsu.rds.data.models;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String userId;
     private String password;
     private String firstName;
@@ -28,7 +30,9 @@ public class User {
         this.userId = userId;
     }
 
-    public String getPassword() { return password; }
+    public String getPassword() {
+        return password;
+    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -67,6 +71,6 @@ public class User {
     }
 
     public String getFullName() {
-        return firstName+ " "+ lastName;
+        return firstName + " " + lastName;
     }
 }

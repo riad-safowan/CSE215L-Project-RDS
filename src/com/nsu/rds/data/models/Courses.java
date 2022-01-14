@@ -1,6 +1,8 @@
 package src.com.nsu.rds.data.models;
 
-public class Courses {
+import java.io.Serializable;
+
+public class Courses implements Serializable {
     private String initial;
     private String name;
     private double credit;

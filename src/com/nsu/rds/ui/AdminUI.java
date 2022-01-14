@@ -19,8 +19,7 @@ public class AdminUI {
 
     static void homeScreen(User user) {
         currentUser = user;
-        Utils.printTitle("ADMIN PANEL");
-        Utils.printTitle(currentUser.getFullName());
+        Utils.printTitle("ADMIN PANEL(" + currentUser.getFullName() + ")");
         boolean isDone = false;
 
         do {
@@ -199,7 +198,7 @@ public class AdminUI {
         System.out.println("│   ID       │       Student Name           │   Due amount   │");
         System.out.println("├────────────┼──────────────────────────────┼────────────────┤");
         for (Student student : list) {
-            System.out.println("│ " + String.format("%-11s", student.getUserId()) + "│ " + String.format("%-29s", student.getFullName()) +  "│ " + String.format("%8.2f/- BDT",student.getUnpaidAmount()) +" │");
+            System.out.println("│ " + String.format("%-11s", student.getUserId()) + "│ " + String.format("%-29s", student.getFullName()) + "│ " + String.format("%8.2f/- BDT", student.getUnpaidAmount()) + " │");
         }
         System.out.println("└────────────┴──────────────────────────────┴────────────────┘");
         System.out.print("Enter Student ID to remove(0 to back): ");
@@ -269,6 +268,7 @@ public class AdminUI {
         scanner.nextLine();
         System.out.println();
     }
+
     public static void changeAdminPass() {
         Utils.printTitle("Change Password");
         boolean isSuccess = false;

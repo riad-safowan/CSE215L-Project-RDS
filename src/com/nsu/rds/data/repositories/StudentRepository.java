@@ -5,14 +5,10 @@ import src.com.nsu.rds.data.models.Student;
 import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.utils.Const;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class StudentRepository {
     public static ArrayList<Student> students = new ArrayList<>();
@@ -30,12 +26,10 @@ public class StudentRepository {
         ArrayList<User> users = new ArrayList(students);
         users.addAll(AdminRepository.getAdmins());
         AdminRepository.setUsers(users);
-        try {
-            FileWriter myWriter = new FileWriter(Const.ALL_STUDENT_LIST);
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Const.ALL_STUDENT_LIST))) {
             for (Student s : students) {
-                myWriter.write(s.getUserId() + " " + s.getPassword() + " " + s.isAdmin() + " " + s.getAddedBy() + " " + s.getFullName() + " " + s.getUnpaidAmount() + "\n");
+                outputStream.writeObject(s);
             }
-            myWriter.close();
             for (Student s : students) createCourseFile(s);
         } catch (IOException e) {
             e.printStackTrace();
@@ -59,9 +53,8 @@ public class StudentRepository {
     }
 
     private static void createCourseFile(Student s) {
-        try {
-            File myObj = new File(Const.getCourseFileName(s.getUserId()));
-            myObj.createNewFile();
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Const.getCourseFileName(s.getUserId())))) {
+
         } catch (IOException e) {
             System.out.println("An error occurred creating file.");
             e.printStackTrace();
@@ -70,26 +63,23 @@ public class StudentRepository {
 
     public static ArrayList<Student> getStudents() {
         ArrayList<Student> newList = new ArrayList<>();
-        try {
-            File myObj = new File(Const.ALL_STUDENT_LIST);
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNext()) {
-                newList.add(new Student(myReader.next(), myReader.next(), !Objects.equals(myReader.next(), "false"), myReader.next(), myReader.next(), myReader.next(), List.of(), myReader.nextDouble()));
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(Const.ALL_STUDENT_LIST))) {
+            while (true) {
+                newList.add((Student) inputStream.readObject());
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
+        } catch (EOFException e) {
+            return newList;
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return newList;
     }
 
     public static void setCourses(String userId, ArrayList<Courses> courses) {
-        try {
-            FileWriter myWriter = new FileWriter(Const.getCourseFileName(userId));
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Const.getCourseFileName(userId)))) {
             for (Courses c : courses) {
-                myWriter.write(c.getInitial() + " " + c.getName() + " " + c.getCredit() + "\n");
+                outputStream.writeObject(c);
             }
-            myWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -97,14 +87,13 @@ public class StudentRepository {
 
     public static ArrayList<Courses> getCourses(String userId) {
         ArrayList<Courses> newList = new ArrayList<>();
-        try {
-            File myObj = new File(Const.getCourseFileName(userId));
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNext()) {
-                newList.add(new Courses(myReader.next(), myReader.next(), myReader.nextDouble()));
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(Const.getCourseFileName(userId)))) {
+            while (true) {
+                newList.add((Courses) inputStream.readObject());
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
+        } catch (EOFException e) {
+            return newList;
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return newList;

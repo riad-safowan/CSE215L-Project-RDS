@@ -5,10 +5,7 @@ import src.com.nsu.rds.data.models.Student;
 import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.utils.Const;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,26 +24,23 @@ public class AdminRepository {
 
     public static ArrayList<User> getUsers() {
         ArrayList<User> newList = new ArrayList<>();
-        try {
-            File myObj = new File(Const.ALL_USER_LIST);
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNext()) {
-                newList.add(new User(myReader.next(), myReader.next(), !Objects.equals(myReader.next(), "false"), myReader.next(), myReader.next(), myReader.next()));
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(Const.ALL_USER_LIST))) {
+            while (true) {
+                newList.add((User) inputStream.readObject());
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
+        } catch (EOFException e) {
+            return newList;
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return newList;
     }
 
     public static void setUsers(ArrayList<User> users) {
-        try {
-            FileWriter myWriter = new FileWriter(Const.ALL_USER_LIST);
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Const.ALL_USER_LIST))) {
             for (User u : users) {
-                myWriter.write(u.getUserId() + " " + u.getPassword() + " " + u.isAdmin() + " " + u.getAddedBy() + " " + u.getFullName() + "\n");
+                outputStream.writeObject(u);
             }
-            myWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -121,6 +115,7 @@ public class AdminRepository {
         }
         return fee;
     }
+
     public static void updateAdminPassword(String userId, String newP) {
     }
 }

@@ -1,8 +1,9 @@
 package src.com.nsu.rds.data.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Student extends User {
+public class Student extends User implements Serializable {
     private List<Courses> coursesList;
     private double unpaidAmount;
 
