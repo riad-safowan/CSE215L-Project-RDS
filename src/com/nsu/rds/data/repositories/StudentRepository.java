@@ -134,10 +134,15 @@ public class StudentRepository {
         if (found) {
             list.remove(index);
             AdminRepository.removeUser(id);
-
+            removeStudentsCourse(id);
         }
         setStudents(list);
         return found;
+    }
+
+    private static void removeStudentsCourse(String id) {
+        File myObj = new File(Const.getCourseFileName(id));
+        myObj.delete();
     }
 
     public static void updatePassword(String userId, String newP) {
