@@ -117,5 +117,13 @@ public class AdminRepository {
     }
 
     public static void updateAdminPassword(String userID, String newP) {
+        ArrayList<User> users = getUsers();
+        for (User u : users) {
+            if (Objects.equals(u.getUserId(), userID)) {
+                u.setPassword(newP);
+                break;
+            }
+        }
+        setUsers(users);
     }
 }
