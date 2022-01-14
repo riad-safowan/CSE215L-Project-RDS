@@ -116,6 +116,6 @@ public class AdminRepository {
         return fee;
     }
 
-    public static void updateAdminPassword(String userId, String newP) {
+    public static void updateAdminPassword(String userID, String newP) {
     }
 }
