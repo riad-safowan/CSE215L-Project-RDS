@@ -28,27 +28,30 @@ public class AdminUI {
             System.out.println(" 2 -> Add a new student");
             System.out.println(" 3 -> Remove a student");
             System.out.println(" 4 -> Edit a student data");
-            System.out.println(" 5 -> See admin list");
-            System.out.println(" 6 -> Add a new admin");
-            System.out.println(" 7 -> See course list");
-            System.out.println(" 8 -> Add a new course");
-            System.out.println(" 9 -> Remove a Course");
-            System.out.println("10 -> All user list");
+            System.out.println(" 5 -> Change Password");
+            System.out.println(" 6 -> See admin list");
+            System.out.println(" 7 -> Add a new admin");
+            System.out.println(" 8 -> See course list");
+            System.out.println(" 9 -> Add a new course");
+            System.out.println("10 -> Remove a Course");
+            System.out.println("11 -> All user list");
             System.out.println(" 0 -> Logout");
             try {
                 System.out.print("Select an option: ");
                 scanner = new Scanner(System.in);
                 switch (scanner.nextInt()) {
+
                     case 1 -> studentList();
                     case 2 -> addStudent();
                     case 3 -> removeStudent();
                     case 4 -> editStudent();
-                    case 5 -> adminList();
-                    case 6 -> addAdmin();
-                    case 7 -> courseList();
-                    case 8 -> addCourse();
-                    case 9 -> removeCourse();
-                    case 10 -> allUserList();
+                    case 5 -> changeAdminPass();
+                    case 6 -> adminList();
+                    case 7 -> addAdmin();
+                    case 8 -> courseList();
+                    case 9 -> addCourse();
+                    case 10 -> removeCourse();
+                    case 11 -> allUserList();
                     case 0 -> isDone = true;
                     default -> System.out.println("Wrong Input! Select Again: \n");
                 }
@@ -64,14 +67,14 @@ public class AdminUI {
     private static void allUserList() {
         Utils.printTitle("ALL USERS");
         ArrayList<User> list = AdminRepository.getUsers();
-        System.out.println("┌──────────┬──────────────────────────────┬────────────┬───────────┐");
-        System.out.println("│ ID       │        Name                  │ Status     │ Added by  │");
-        System.out.println("├──────────┼──────────────────────────────┼────────────┼───────────┤");
+        System.out.println("┌────────────┬──────────────────────────────┬────────────┬───────────┐");
+        System.out.println("│ ID         │        Name                  │ Status     │ Added by  │");
+        System.out.println("├────────────┼──────────────────────────────┼────────────┼───────────┤");
         for (User s : list) {
-            System.out.println("│ " + String.format("%-9s", s.getUserId()) + "│ " + String.format("%-29s", s.getFullName()) + "│ "
+            System.out.println("│ " + String.format("%-11s", s.getUserId()) + "│ " + String.format("%-29s", s.getFullName()) + "│ "
                     + String.format("%-11s", (s.isAdmin() ? "ADMIN" : "STUDENT")) + "│ " + String.format("%-9s", s.getAddedBy()) + " │");
         }
-        System.out.println("└──────────┴──────────────────────────────┴────────────┴───────────┘");
+        System.out.println("└────────────┴──────────────────────────────┴────────────┴───────────┘");
         scanner = new Scanner(System.in);
         System.out.print("Press 'Enter' to go back ");
         scanner.nextLine();
@@ -174,13 +177,13 @@ public class AdminUI {
     private static void adminList() {
         Utils.printTitle("ALL ADMINS");
         ArrayList<User> list = AdminRepository.getAdmins();
-        System.out.println("┌──────────┬───────────────────────────────┐");
-        System.out.println("│ ID       │      Admin  Name              │");
-        System.out.println("├──────────┼───────────────────────────────┤");
+        System.out.println("┌────────────┬───────────────────────────────┐");
+        System.out.println("│ ID         │      Admin  Name              │");
+        System.out.println("├────────────┼───────────────────────────────┤");
         for (User s : list) {
-            System.out.println("│ " + String.format("%-9s", s.getUserId()) + "│ " + String.format("%-29s", s.getFullName()) + " │");
+            System.out.println("│ " + String.format("%-11s", s.getUserId()) + "│ " + String.format("%-29s", s.getFullName()) + " │");
         }
-        System.out.println("└──────────┴───────────────────────────────┘");
+        System.out.println("└────────────┴───────────────────────────────┘");
         scanner = new Scanner(System.in);
         System.out.print("Press 'Enter' to go back ");
         scanner.nextLine();
@@ -192,13 +195,13 @@ public class AdminUI {
     private static void removeStudent() {
         Utils.printTitle("REMOVE A STUDENT");
         ArrayList<Student> list = StudentRepository.getStudents();
-        System.out.println("┌──────────┬──────────────────────────────┬────────────────┐");
-        System.out.println("│   ID     │       Student Name           │   Due amount   │");
-        System.out.println("├──────────┼──────────────────────────────┼────────────────┤");
+        System.out.println("┌────────────┬──────────────────────────────┬────────────────┐");
+        System.out.println("│   ID       │       Student Name           │   Due amount   │");
+        System.out.println("├────────────┼──────────────────────────────┼────────────────┤");
         for (Student student : list) {
-            System.out.println("│ " + String.format("%-9s", student.getUserId()) + "│ " + String.format("%-29s", student.getFullName()) +  "│ " + String.format("%8.2f/- BDT",student.getUnpaidAmount()) +" │");
+            System.out.println("│ " + String.format("%-11s", student.getUserId()) + "│ " + String.format("%-29s", student.getFullName()) +  "│ " + String.format("%8.2f/- BDT",student.getUnpaidAmount()) +" │");
         }
-        System.out.println("└──────────┴──────────────────────────────┴────────────────┘");
+        System.out.println("└────────────┴──────────────────────────────┴────────────────┘");
         System.out.print("Enter Student ID to remove(0 to back): ");
         scanner = new Scanner(System.in);
         String id = scanner.next();
@@ -217,19 +220,20 @@ public class AdminUI {
         Utils.printTitle("STUDENT FORM");
         boolean isSuccess = false;
         do {
-            System.out.print("Enter NSU ID (0 to back): ");
+            System.out.print("Enter NSU ID (0 to back) ");
+            System.out.println("ID Must contain 10 Digits.");
             String userId = scanner.next();
             if (Objects.equals(userId, "0")) {
                 System.out.println();
                 break;
             }
-            System.out.print("Enter First Name      : ");
+            System.out.print("Enter First Name        : ");
             String firstName = scanner.next();
-            System.out.print("Enter Last Name       : ");
+            System.out.print("Enter Last Name         : ");
             String lastName = scanner.next();
-            System.out.print("Set a password        : ");
+            System.out.print("Set a password          : ");
             String password = scanner.next();
-            System.out.print("Re-enter the password : ");
+            System.out.print("Re-enter the password   : ");
             String rePassword = scanner.next();
             if (!Objects.equals(password, rePassword)) {
                 System.out.println("Password did not match!!\n");
@@ -251,19 +255,43 @@ public class AdminUI {
     private static void studentList() {
         Utils.printTitle("ALL STUDENTS");
         ArrayList<Student> list = StudentRepository.getStudents();
-        System.out.println("┌──────────┬──────────────────────────────┬────────────────┐");
-        System.out.println("│    ID    │        Student Name          │   Due amount   │");
-        System.out.println("├──────────┼──────────────────────────────┼────────────────┤");
+        System.out.println("┌────────────┬──────────────────────────────┬────────────────┐");
+        System.out.println("│    ID      │        Student Name          │   Due amount   │");
+        System.out.println("├────────────┼──────────────────────────────┼────────────────┤");
         for (Student s : list) {
-            System.out.println("│ " + String.format("%-9s", s.getUserId()) +
+            System.out.println("│ " + String.format("%-11s", s.getUserId()) +
                     "│ " + String.format("%-29s", s.getFullName()) +
                     "│ " + String.format("%8.2f/- BDT", s.getUnpaidAmount()) + " │");
         }
-        System.out.println("└──────────┴──────────────────────────────┴────────────────┘");
+        System.out.println("└────────────┴──────────────────────────────┴────────────────┘");
         scanner = new Scanner(System.in);
         System.out.print("Press 'Enter' to go back ");
         scanner.nextLine();
         System.out.println();
+    }
+    public static void changeAdminPass() {
+        Utils.printTitle("Change Password");
+        boolean isSuccess = false;
+
+        do {
+            System.out.print("Enter your old Password (0 to cancel): ");
+            String oldPass = scanner.next();
+            if (Objects.equals(oldPass, "0")) {
+                System.out.println();
+                break;
+            }
+            System.out.print("Enter your new password: ");
+            String newPass = scanner.next();
+            System.out.print("Re-enter your new password: ");
+            String rNewPass = scanner.next();
+            if (!Objects.equals(oldPass, currentUser.getPassword()) || !Objects.equals(newPass, rNewPass)) {
+                System.out.print("Password did not match!!\n");
+                continue;
+            }
+            AdminRepository.updateAdminPassword(currentUser.getUserId(), newPass);
+            isSuccess = true;
+            System.out.println("### Password changed ###\n");
+        } while (!isSuccess);
     }
 }
 
