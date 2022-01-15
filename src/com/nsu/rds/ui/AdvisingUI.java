@@ -6,11 +6,16 @@ import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.data.repositories.AdminRepository;
 import src.com.nsu.rds.data.repositories.CourseRepository;
 import src.com.nsu.rds.data.repositories.StudentRepository;
+import src.com.nsu.rds.utils.Const;
 import src.com.nsu.rds.utils.Utils;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class AdvisingUI {
@@ -53,43 +58,56 @@ public class AdvisingUI {
     private static void printAdvisingSlip() {
         Fee fee = AdminRepository.getFees();
         Utils.printTitle("ADVISING SLIP");
-        System.out.println();
-        System.out.println("\t\t\t      North South University");
-        System.out.println("\t\t     Student Registration - Fall 2021");
-        System.out.println("\t\tDate : " + new SimpleDateFormat("EEEE, dd MMMM yyyy, hh:mm:ss a").format(Calendar.getInstance().getTime()));
-        System.out.println();
-        System.out.println("Student Name: " + String.format("%-30s", currentUser.getFullName()) + "ID# " + String.format("%-9s", currentUser.getUserId()) + "   Degree: Undergraduate");
-        System.out.println();
-        System.out.println("\t┌──────┬──────────┬──────────────┬──────────────────────┐");
-        System.out.println("\t│  SL  │  Course  │    Credit    │        Tuition       │");
-        System.out.println("\t├──────┼──────────┼──────────────┼──────────────────────┤");
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n\t\t North South University\n");
+        stringBuilder.append("\t\t Student Registration - Fall 2021\n");
+        stringBuilder.append("\t\t Date : ").append(new SimpleDateFormat("EEEE, dd MMMM yyyy, hh:mm:ss a").format(Calendar.getInstance().getTime())).append("\n\n");
+        stringBuilder.append("Student Name: ").append(String.format("%-30s", currentUser.getFullName())).append("ID# ").append(String.format("%-9s", currentUser.getUserId())).append("   Degree: Undergraduate\n\n");
+        stringBuilder.append("\t┌──────┬──────────┬──────────────┬──────────────────────┐\n");
+        stringBuilder.append("\t│  SL  │  Course  │    Credit    │        Tuition       │\n");
+        stringBuilder.append("\t├──────┼──────────┼──────────────┼──────────────────────┤\n");
 
         ArrayList<Courses> courses = StudentRepository.getCourses(currentUser.getUserId());
         double tuition = 0;
         for (int i = 0; i < courses.size(); i++) {
-            System.out.println("\t│ " + String.format("%3d", i + 1) + "  │  " + String.format("%-7s", courses.get(i).getInitial()) + " │ " + String.format("%8.2f", courses.get(i).getCredit()) + "     │ " + String.format("%12.2f/- BDT", courses.get(i).getCredit() * fee.getCreditFee())+ "   │");
+            stringBuilder.append("\t│ ").append(String.format("%3d", i + 1)).append("  │  ").append(String.format("%-7s", courses.get(i).getInitial())).append(" │ ").append(String.format("%8.2f", courses.get(i).getCredit())).append("     │ ").append(String.format("%12.2f/- BDT", courses.get(i).getCredit() * fee.getCreditFee())).append("   │\n");
             tuition = tuition + (courses.get(i).getCredit() * fee.getCreditFee());
         }
-        System.out.println("\t├──────┴──────────┴──────────────┴──────────────────────┤");
-        System.out.println("\t│\t\t\t       Tuition Total :" + String.format("%13.2f/- BDT", tuition)+"   │");
-        System.out.println("\t└───────────────────────────────────────────────────────┘");
-        System.out.println();
-        System.out.println("\t\t\t\tStudent Activity Fee        " + String.format("%7.2f/- BDT", fee.getActivityFee()));
-        System.out.println("\t\t\t\tComputer Lab Fee            " + String.format("%7.2f/- BDT", fee.getComputerLabFee()));
-        System.out.println("\t\t\t\tLibrary Fee                 " + String.format("%7.2f/- BDT", fee.getLibraryFee()));
-        System.out.println("\t\t\t\tScience Lab Fee             " + String.format("%7.2f/- BDT", fee.getScienceLabFee()));
+        stringBuilder.append("\t├──────┴──────────┴──────────────┴──────────────────────┤\n");
+        stringBuilder.append("\t│\t\t\t       Tuition Total :").append(String.format("%13.2f/- BDT", tuition)).append("   │\n");
+        stringBuilder.append("\t└───────────────────────────────────────────────────────┘\n\n");
+        stringBuilder.append("\t\t\t\tStudent Activity Fee        ").append(String.format("%7.2f/- BDT\n", fee.getActivityFee()));
+        stringBuilder.append("\t\t\t\tComputer Lab Fee            ").append(String.format("%7.2f/- BDT\n", fee.getComputerLabFee()));
+        stringBuilder.append("\t\t\t\tLibrary Fee                 ").append(String.format("%7.2f/- BDT\n", fee.getLibraryFee()));
+        stringBuilder.append("\t\t\t\tScience Lab Fee             ").append(String.format("%7.2f/- BDT\n", fee.getScienceLabFee()));
         double nonTuitionFee = fee.getActivityFee() + fee.getComputerLabFee() + fee.getLibraryFee() + fee.getScienceLabFee();
-        System.out.println("\t\t\t\t------------------------------------------");
-        System.out.println("\t\t\t\tTotal:                    " + String.format("%9.2f/- BDT", tuition + nonTuitionFee));
-        System.out.println();
-        System.out.println("\t\t\t\tLess: Non Tuition fees      " + String.format("%7.2f/- BDT", nonTuitionFee));
+        stringBuilder.append("\t\t\t\t------------------------------------------\n");
+        stringBuilder.append("\t\t\t\tTotal:                    ").append(String.format("%9.2f/- BDT\n\n", tuition + nonTuitionFee));
+        stringBuilder.append("\t\t\t\tLess: Non Tuition fees      ").append(String.format("%7.2f/- BDT\n", nonTuitionFee));
         double discount = tuition * fee.getWaiver() / 100;
-        System.out.println("\t\t\t\tLess: Waiver " + fee.getWaiver() + "%         " + String.format("%7.2f/- BDT", discount));
-        System.out.println("\t\t\t\t------------------------------------------");
-        System.out.println("\t\t\t\tPayable:                  " + String.format("%9.2f/- BDT", (tuition - discount)));
-        System.out.println();
-        System.out.println("------------------------------------------------------------");
-        System.out.println();
+        stringBuilder.append("\t\t\t\tLess: Waiver ").append(fee.getWaiver()).append("%         ").append(String.format("%7.2f/- BDT\n", discount));
+        stringBuilder.append("\t\t\t\t------------------------------------------\n");
+        stringBuilder.append("\t\t\t\tPayable:                  ").append(String.format("%9.2f/- BDT\n\n", (tuition - discount)));
+        stringBuilder.append("------------------------------------------------------------\n\n");
+
+        System.out.println(stringBuilder);
+
+        scanner = new Scanner(System.in);
+        System.out.print("Press 'p' to print slip (0 to back): ");
+        String s = scanner.next();
+        if (Objects.equals(s, "p") || Objects.equals(s, "P")) {
+            try (FileWriter fileWriter = new FileWriter(Const.getAdvisingSlipName(currentUser.getUserId(), "fall-21"))) {
+                fileWriter.write(stringBuilder.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Advising slip printed as " + Const.getAdvisingSlipName(currentUser.getUserId(), "fall-21"));
+            System.out.println();
+        } else {
+            System.out.println();
+        }
+
     }
 
     private static void myCourseList() {
@@ -151,7 +169,7 @@ public class AdvisingUI {
         System.out.println("│ Initial  │         Course Name           │   Credit   │");
         System.out.println("├──────────┼───────────────────────────────┼────────────┤");
         for (Courses c : CourseRepository.getCourses()) {
-            System.out.println("│ "+String.format("%-9s", c.getInitial()) + "│ " + String.format("%-30s", c.getName()) + "│ " + String.format("%10.2f", c.getCredit()) + " │");
+            System.out.println("│ " + String.format("%-9s", c.getInitial()) + "│ " + String.format("%-30s", c.getName()) + "│ " + String.format("%10.2f", c.getCredit()) + " │");
         }
         System.out.println("└──────────┴───────────────────────────────┴────────────┘");
 

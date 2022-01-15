@@ -9,4 +9,8 @@ public class Const {
     public static String getCourseFileName(String userId) {
         return userId + "-" + ALL_COURSE_LIST;
     }
+
+    public static String getAdvisingSlipName(String userId, String semester) {
+        return userId + "-" + semester + "-" + ALL_COURSE_LIST;
+    }
 }
