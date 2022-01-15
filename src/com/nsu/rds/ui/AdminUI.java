@@ -66,7 +66,10 @@ public class AdminUI {
     private static void allUserList() {
         Utils.printTitle("ALL USERS");
         ArrayList<User> list = AdminRepository.getUsers();
-        if(list.size()== 0) { System.out.println("User list is empty!\n"); return;}
+        if (list.size() == 0) {
+            System.out.println("User list is empty!\n");
+            return;
+        }
         System.out.println("┌────────────┬──────────────────────────────┬────────────┬───────────┐");
         System.out.println("│ ID         │        Name                  │ Status     │ Added by  │");
         System.out.println("├────────────┼──────────────────────────────┼────────────┼───────────┤");
@@ -84,7 +87,10 @@ public class AdminUI {
     private static void removeCourse() {
         Utils.printTitle("ALL COURSES");
         ArrayList<Courses> cList = CourseRepository.getCourses();
-        if(cList.size()== 0) { System.out.println("Course list is empty!\n"); return;}
+        if (cList.size() == 0) {
+            System.out.println("Course list is empty!\n");
+            return;
+        }
         System.out.println("┌─────┬──────────┬───────────────────────────────┬────────────┐");
         System.out.println("│  No │ Initial  │       Course Name             │   Credit   │");
         System.out.println("├─────┼──────────┼───────────────────────────────┼────────────┤");
@@ -130,7 +136,10 @@ public class AdminUI {
     private static void courseList() {
         Utils.printTitle("ALL COURSES");
         ArrayList<Courses> list = CourseRepository.getCourses();
-        if(list.size()== 0) { System.out.println("Course list is empty!\n"); return;}
+        if (list.size() == 0) {
+            System.out.println("Course list is empty!\n");
+            return;
+        }
         System.out.println("┌──────────┬───────────────────────────────┬────────────┐");
         System.out.println("│ Initial  │         Course Name           │   Credit   │");
         System.out.println("├──────────┼───────────────────────────────┼────────────┤");
@@ -181,7 +190,10 @@ public class AdminUI {
     private static void adminList() {
         Utils.printTitle("ALL ADMINS");
         ArrayList<User> list = AdminRepository.getAdmins();
-        if(list.size()== 0) { System.out.println("No admin available!\n"); return;}
+        if (list.size() == 0) {
+            System.out.println("No admin available!\n");
+            return;
+        }
         System.out.println("┌────────────┬───────────────────────────────┐");
         System.out.println("│ ID         │      Admin  Name              │");
         System.out.println("├────────────┼───────────────────────────────┤");
@@ -196,9 +208,12 @@ public class AdminUI {
 
     private static void editStudent() {
         boolean isDone = false;
-        Utils.printTitle("EDIT A STUDENT INFORMATION");
+        Utils.printTitle("UPDATE STUDENT INFO");
         ArrayList<Student> list = StudentRepository.getStudents();
-        if(list.size()== 0) { System.out.println("Student list is empty!\n"); return;}
+        if (list.size() == 0) {
+            System.out.println("Student list is empty!\n");
+            return;
+        }
         System.out.println("┌────────────┬──────────────────────────────┬────────────────┐");
         System.out.println("│   ID       │       Student Name           │   Due amount   │");
         System.out.println("├────────────┼──────────────────────────────┼────────────────┤");
@@ -206,7 +221,7 @@ public class AdminUI {
             System.out.println("│ " + String.format("%-11s", student.getUserId()) + "│ " + String.format("%-29s", student.getFullName()) + "│ " + String.format("%8.2f/- BDT", student.getUnpaidAmount()) + " │");
         }
         System.out.println("└────────────┴──────────────────────────────┴────────────────┘");
-        System.out.print("Enter Student ID to edit(0 to back): ");
+        System.out.print("Enter Student ID to update(0 to back): ");
         scanner = new Scanner(System.in);
         String id = scanner.next();
         if (Objects.equals(id, "0")) {
@@ -218,13 +233,22 @@ public class AdminUI {
         Utils.printTitle("STUDENT FORM");
         boolean isSuccess = false;
         do {
-            System.out.print("Enter First Name        : ");
-            String firstName = scanner.next();
-            System.out.print("Enter Last Name         : ");
-            String lastName = scanner.next();
+            System.out.print("Enter First Name   (0 to set unchanged as \"" + s.getFirstName() + "\"): ");
+            scanner = new Scanner(System.in);
+            String firstName = scanner.nextLine();
+            if (!Objects.equals(firstName, "0")) {
+                s.setFirstName(firstName);
+            }
+
+            System.out.print("Enter Last Name    (0 to set unchanged as \"" + s.getLastName() + "\"): ");
+            scanner = new Scanner(System.in);
+            String lastName = scanner.nextLine();
+            if (!Objects.equals(lastName, "0")) {
+                s.setLastName(lastName);
+            }
 
             try {
-                StudentRepository.addStudent(s);
+                StudentRepository.updateStudent(s);
                 isSuccess = true;
                 System.out.println("### Student  data updated ###\n");
                 System.out.println();
@@ -237,7 +261,10 @@ public class AdminUI {
     private static void removeStudent() {
         Utils.printTitle("REMOVE A STUDENT");
         ArrayList<Student> list = StudentRepository.getStudents();
-        if(list.size()== 0) { System.out.println("Student list is empty!\n"); return;}
+        if (list.size() == 0) {
+            System.out.println("Student list is empty!\n");
+            return;
+        }
         System.out.println("┌────────────┬──────────────────────────────┬────────────────┐");
         System.out.println("│   ID       │       Student Name           │   Due amount   │");
         System.out.println("├────────────┼──────────────────────────────┼────────────────┤");
@@ -298,7 +325,10 @@ public class AdminUI {
     private static void studentList() {
         Utils.printTitle("ALL STUDENTS");
         ArrayList<Student> list = StudentRepository.getStudents();
-        if(list.size()== 0) { System.out.println("Student list is empty!\n"); return;}
+        if (list.size() == 0) {
+            System.out.println("Student list is empty!\n");
+            return;
+        }
         System.out.println("┌────────────┬──────────────────────────────┬────────────────┐");
         System.out.println("│    ID      │        Student Name          │   Due amount   │");
         System.out.println("├────────────┼──────────────────────────────┼────────────────┤");

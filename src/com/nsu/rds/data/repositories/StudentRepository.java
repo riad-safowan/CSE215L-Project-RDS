@@ -53,11 +53,14 @@ public class StudentRepository {
     }
 
     private static void createCourseFile(Student s) {
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Const.getCourseFileName(s.getUserId())))) {
+        File file = new File(Const.getCourseFileName(s.getUserId()));
+        if (!file.exists()) {
+            try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Const.getCourseFileName(s.getUserId())))) {
 
-        } catch (IOException e) {
-            System.out.println("An error occurred creating file.");
-            e.printStackTrace();
+            } catch (IOException e) {
+                System.out.println("An error occurred creating file.");
+                e.printStackTrace();
+            }
         }
     }
 
@@ -149,6 +152,17 @@ public class StudentRepository {
         ArrayList<Student> students = getStudents();
         for (Student s : students) {
             if (Objects.equals(s.getUserId(), userId)) s.setPassword(newP);
+        }
+        setStudents(students);
+    }
+
+    public static void updateStudent(Student updatedStudent) {
+        ArrayList<Student> students = getStudents();
+        for (Student s : students) {
+            if (Objects.equals(s.getUserId(), updatedStudent.getUserId())) {
+                students.remove(s);
+                students.add(updatedStudent);
+            }
         }
         setStudents(students);
     }
