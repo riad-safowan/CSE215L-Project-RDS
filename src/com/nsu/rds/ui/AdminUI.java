@@ -195,6 +195,43 @@ public class AdminUI {
     }
 
     private static void editStudent() {
+        boolean isDone = false;
+        Utils.printTitle("EDIT A STUDENT INFORMATION");
+        ArrayList<Student> list = StudentRepository.getStudents();
+        if(list.size()== 0) { System.out.println("Student list is empty!\n"); return;}
+        System.out.println("┌────────────┬──────────────────────────────┬────────────────┐");
+        System.out.println("│   ID       │       Student Name           │   Due amount   │");
+        System.out.println("├────────────┼──────────────────────────────┼────────────────┤");
+        for (Student student : list) {
+            System.out.println("│ " + String.format("%-11s", student.getUserId()) + "│ " + String.format("%-29s", student.getFullName()) + "│ " + String.format("%8.2f/- BDT", student.getUnpaidAmount()) + " │");
+        }
+        System.out.println("└────────────┴──────────────────────────────┴────────────────┘");
+        System.out.print("Enter Student ID to edit(0 to back): ");
+        scanner = new Scanner(System.in);
+        String id = scanner.next();
+        if (Objects.equals(id, "0")) {
+            System.out.println();
+            return;
+        }
+        Student s = StudentRepository.getStudentById(id);
+
+        Utils.printTitle("STUDENT FORM");
+        boolean isSuccess = false;
+        do {
+            System.out.print("Enter First Name        : ");
+            String firstName = scanner.next();
+            System.out.print("Enter Last Name         : ");
+            String lastName = scanner.next();
+
+            try {
+                StudentRepository.addStudent(s);
+                isSuccess = true;
+                System.out.println("### Student  data updated ###\n");
+                System.out.println();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!isSuccess);
     }
 
     private static void removeStudent() {
@@ -277,7 +314,7 @@ public class AdminUI {
         System.out.println();
     }
 
-    public static void changeAdminPass() {
+    private static void changeAdminPass() {
         Utils.printTitle("Change Password");
         boolean isSuccess = false;
 
