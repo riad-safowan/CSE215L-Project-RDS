@@ -1,7 +1,6 @@
 package src.com.nsu.rds.data.repositories;
 
 import src.com.nsu.rds.data.models.Fee;
-import src.com.nsu.rds.data.models.Student;
 import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.utils.Const;
 
@@ -9,7 +8,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class AdminRepository {
     public static ArrayList<User> users = new ArrayList<>();
@@ -19,7 +17,7 @@ public class AdminRepository {
                 new User("a", "1", true, "Developer", "Test", "Admin")
         ));
         setUsers(users);
-        setFees(new Fee(6500, 3000, 2500, 1500, 2500, 10));
+        setFees(new Fee(6500, 3000, 2500, 1500, 2500, 10)); // TODO: 1/15/2022  admin can change fees 
     }
 
     public static ArrayList<User> getUsers() {

@@ -1,6 +1,7 @@
 package src.com.nsu.rds.ui;
 
 import src.com.nsu.rds.data.models.Courses;
+import src.com.nsu.rds.data.models.Fee;
 import src.com.nsu.rds.data.models.Student;
 import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.data.repositories.CourseRepository;
@@ -34,6 +35,7 @@ public class AdminUI {
             System.out.println(" 9 -> Add a new course");
             System.out.println("10 -> Remove a Course");
             System.out.println("11 -> All user list");
+            System.out.println("12 -> Update all fees");
             System.out.println(" 0 -> Logout");
             try {
                 System.out.print("Select an option: ");
@@ -51,6 +53,7 @@ public class AdminUI {
                     case 9 -> addCourse();
                     case 10 -> removeCourse();
                     case 11 -> allUserList();
+                    case 12 -> updateFees();
                     case 0 -> isDone = true;
                     default -> System.out.println("Wrong Input! Select Again: \n");
                 }
@@ -61,6 +64,46 @@ public class AdminUI {
         } while (!isDone);
         System.out.println("You are logged out!! ");
         LoginUI.showLoginScreen();
+    }
+
+    private static void updateFees() {
+
+        Fee fees = AdminRepository.getFees();
+        System.out.print("Update creditFee ('-1' to set unchanged as " + fees.getCreditFee() + ") : ");
+        double input = scanner.nextDouble();
+        if (!(input == -1.0)) {
+            fees.setCreditFee(input);
+        }
+        System.out.print("Update activityFee ('-1' to set unchanged as " + fees.getActivityFee() + ") : ");
+        input = scanner.nextDouble();
+        if (!(input == -1.0)) {
+            fees.setActivityFee(input);
+        }
+        System.out.print("Update computerLabFee ('-1' to set unchanged as " + fees.getComputerLabFee() + ") : ");
+        input = scanner.nextDouble();
+        if (!(input == -1.0)) {
+            fees.setComputerLabFee(input);
+        }
+        System.out.print("Update libraryFee ('-1' to set unchanged as " + fees.getLibraryFee() + ") : ");
+        input = scanner.nextDouble();
+        if (!(input == -1.0)) {
+            fees.setLibraryFee(input);
+        }
+        System.out.print("Update scienceLabFee ('-1' to set unchanged as " + fees.getScienceLabFee() + ") : ");
+        input = scanner.nextDouble();
+        if (!(input == -1.0)) {
+            fees.setScienceLabFee(input);
+        }
+        System.out.print("Update waiver ('-1' to set unchanged as " + fees.getWaiver() + ") : ");
+        input = scanner.nextDouble();
+        if (!(input == -1.0)) {
+            fees.setWaiver(input);
+        }
+
+        AdminRepository.setFees(fees);
+
+        System.out.println("Done with updating All fees\n");
+
     }
 
     private static void allUserList() {

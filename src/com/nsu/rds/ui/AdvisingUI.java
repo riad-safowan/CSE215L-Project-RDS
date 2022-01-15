@@ -9,7 +9,6 @@ import src.com.nsu.rds.data.repositories.StudentRepository;
 import src.com.nsu.rds.utils.Const;
 import src.com.nsu.rds.utils.Utils;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;

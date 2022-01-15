@@ -2,14 +2,12 @@ package src.com.nsu.rds.data.repositories;
 
 import src.com.nsu.rds.data.models.Courses;
 import src.com.nsu.rds.data.models.Student;
-import src.com.nsu.rds.data.models.User;
 import src.com.nsu.rds.utils.Const;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class CourseRepository {
     public static ArrayList<Courses> courses = new ArrayList<>();
