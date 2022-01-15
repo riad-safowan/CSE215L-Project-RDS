@@ -1,4 +1,4 @@
-package src.com.nsu.rds.data.models;
+package com.nsu.rds.data.models;
 
 import java.io.Serializable;
 

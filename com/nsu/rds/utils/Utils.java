@@ -1,8 +1,8 @@
-package src.com.nsu.rds.utils;
+package com.nsu.rds.utils;
 
-import src.com.nsu.rds.data.repositories.CourseRepository;
-import src.com.nsu.rds.data.repositories.StudentRepository;
-import src.com.nsu.rds.data.repositories.AdminRepository;
+import com.nsu.rds.data.repositories.CourseRepository;
+import com.nsu.rds.data.repositories.StudentRepository;
+import com.nsu.rds.data.repositories.AdminRepository;
 
 public class Utils {
     public static void printTitle(String text) {

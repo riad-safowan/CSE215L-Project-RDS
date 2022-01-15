@@ -1,7 +1,7 @@
-package src.com.nsu.rds;
+package com.nsu.rds;
 
-import src.com.nsu.rds.ui.LoginUI;
-import src.com.nsu.rds.utils.Utils;
+import com.nsu.rds.ui.LoginUI;
+import com.nsu.rds.utils.Utils;
 
 
 public class Main {

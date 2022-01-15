@@ -1,9 +1,9 @@
-package src.com.nsu.rds.data.repositories;
+package com.nsu.rds.data.repositories;
 
-import src.com.nsu.rds.data.models.Courses;
-import src.com.nsu.rds.data.models.Student;
-import src.com.nsu.rds.data.models.User;
-import src.com.nsu.rds.utils.Const;
+import com.nsu.rds.data.models.Courses;
+import com.nsu.rds.data.models.Student;
+import com.nsu.rds.data.models.User;
+import com.nsu.rds.utils.Const;
 
 import java.io.*;
 import java.util.ArrayList;

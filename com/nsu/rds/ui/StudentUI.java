@@ -1,9 +1,9 @@
-package src.com.nsu.rds.ui;
+package com.nsu.rds.ui;
 
-import src.com.nsu.rds.data.models.Student;
-import src.com.nsu.rds.data.models.User;
-import src.com.nsu.rds.data.repositories.StudentRepository;
-import src.com.nsu.rds.utils.Utils;
+import com.nsu.rds.data.models.Student;
+import com.nsu.rds.data.models.User;
+import com.nsu.rds.data.repositories.StudentRepository;
+import com.nsu.rds.utils.Utils;
 
 import java.util.Objects;
 import java.util.Scanner;
