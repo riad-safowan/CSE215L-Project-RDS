@@ -20,6 +20,31 @@ public class AdminRepository {
         setFees(new Fee(6500, 3000, 2500, 1500, 2500, 10)); // TODO: 1/15/2022  admin can change fees 
     }
 
+    public static void setDefaultAdmin() {
+        boolean isFound = false;
+        File file = new File(Const.ALL_USER_LIST);
+        if (!file.exists()) {
+            users.addAll(List.of(
+                    new User("a", "1", true, "Developer", "Test", "Admin")
+            ));
+            setUsers(users);
+            return;
+        }
+        ArrayList<User> users = getUsers();
+        for (User u : users) {
+            if (Objects.equals(u.getUserId(), "a")) {
+                isFound = true;
+                break;
+            }
+        }
+        if (!isFound) {
+            users.addAll(List.of(
+                    new User("a", "1", true, "Developer", "Test", "Admin")
+            ));
+            setUsers(users);
+        }
+    }
+
     public static ArrayList<User> getUsers() {
         ArrayList<User> newList = new ArrayList<>();
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(Const.ALL_USER_LIST))) {

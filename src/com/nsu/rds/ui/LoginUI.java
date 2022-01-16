@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class LoginUI {
     static Scanner scanner = new Scanner(System.in);
+
     public static void showLoginScreen() {
         boolean isSuccess = false;
         do {
@@ -34,6 +35,7 @@ public class LoginUI {
     }
 
     private static User loginSuccess(String username, String password) {
+        AdminRepository.setDefaultAdmin();
         ArrayList<User> users = AdminRepository.getUsers();
         for (User user : users) {
             if (Objects.equals(user.getUserId(), username)) {
