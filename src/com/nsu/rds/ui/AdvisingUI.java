@@ -85,7 +85,7 @@ public class AdvisingUI {
         stringBuilder.append("\t\t\t\tTotal:                    ").append(String.format("%9.2f/- BDT\n\n", tuition + nonTuitionFee));
         stringBuilder.append("\t\t\t\tLess: Non Tuition fees      ").append(String.format("%7.2f/- BDT\n", nonTuitionFee));
         double discount = tuition * fee.getWaiver() / 100;
-        stringBuilder.append("\t\t\t\tLess: Waiver ").append(String.format("%-3.1f", fee.getWaiver())).append("%         ").append(String.format("%7.2f/- BDT\n", discount));
+        stringBuilder.append("\t\t\t\tLess: Waiver ").append(String.format("%5.1f", fee.getWaiver())).append("%         ").append(String.format("%7.2f/- BDT\n", discount));
         stringBuilder.append("\t\t\t\t------------------------------------------\n");
         stringBuilder.append("\t\t\t\tPayable:                  ").append(String.format("%9.2f/- BDT\n\n", (tuition - discount)));
         stringBuilder.append("------------------------------------------------------------\n\n");
