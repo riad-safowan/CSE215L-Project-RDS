@@ -162,7 +162,8 @@ public class AdminUI {
             String initial = scanner.next();
             if (Objects.equals(initial, "0")) break;
             System.out.print("Enter Course Name               : ");
-            String name = scanner.next();
+            scanner = new Scanner(System.in);
+            String name = scanner.nextLine();
             System.out.print("Enter Course credit             : ");
             int credit = scanner.nextInt();
             Courses courses = new Courses(initial, name, credit);
@@ -341,10 +342,13 @@ public class AdminUI {
                 break;
             }
             System.out.print("Enter First Name        : ");
-            String firstName = scanner.next();
+            scanner = new Scanner(System.in);
+            String firstName = scanner.nextLine();
             System.out.print("Enter Last Name         : ");
-            String lastName = scanner.next();
+            scanner = new Scanner(System.in);
+            String lastName = scanner.nextLine();
             System.out.print("Set a password          : ");
+            scanner = new Scanner(System.in);
             String password = scanner.next();
             System.out.print("Re-enter the password   : ");
             String rePassword = scanner.next();
