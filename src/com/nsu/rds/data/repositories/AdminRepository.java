@@ -17,7 +17,7 @@ public class AdminRepository {
                 new User("a", "1", true, "Developer", "Test", "Admin")
         ));
         setUsers(users);
-        setFees(new Fee(6500, 3000, 2500, 1500, 2500, 10)); // TODO: 1/15/2022  admin can change fees 
+        setFees(new Fee(6500, 3000, 2500, 1500, 2500, 10));
     }
 
     public static void setDefaultAdmin() {
